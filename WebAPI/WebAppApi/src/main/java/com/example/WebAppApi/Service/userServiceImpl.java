@@ -3,17 +3,17 @@ package com.example.WebAppApi.Service;
 import org.springframework.stereotype.Service;
 
 import com.example.WebAppApi.Model.User;
-import com.example.WebAppApi.Repository.userRepository;
+import com.example.WebAppApi.Repository.UserRepository;
 
 import jakarta.annotation.Resource;
 import jakarta.transaction.Transactional;
 
 
 @Service
-public class userServiceImpl implements userService {
+public class UserServiceImpl implements UserService {
 
     @Resource
-    private userRepository UserRepository;
+    private UserRepository UserRepository;
 
     @Override
     @Transactional

@@ -1,5 +1,5 @@
 package com.example.WebAppApi.Service;
 
-public class businessService {
+public class BusinessService {
     
 }

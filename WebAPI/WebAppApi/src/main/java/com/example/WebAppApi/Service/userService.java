@@ -2,7 +2,7 @@ package com.example.WebAppApi.Service;
 
 import com.example.WebAppApi.Model.User;
 
-public interface userService {
+public interface UserService {
 
     User createUser (User user);
     
