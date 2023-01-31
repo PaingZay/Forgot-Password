@@ -27,27 +27,16 @@ public class Business
 	private int id;
 
 	private String emailAddress;
-
     private String password;
-
     private String category;
-
     private String businessName;
-
     private String branch;
-
     private String businessType;
-
     private String address;
-
     private String postalCode;
-
     private String contactNumber;
-
     private String[] openingDays;
-
     private LocalTime openingTime;
-
     private LocalTime closingTime;
 
     @OneToMany (mappedBy = "business")
@@ -71,6 +60,5 @@ public class Business
         this.openingTime = openingTime;
         this.closingTime = closingTime;
     }
-
 }
 
