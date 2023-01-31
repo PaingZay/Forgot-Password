@@ -10,34 +10,32 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import com.example.WebAppClient.Model.User;
-import com.example.WebAppClient.Service.UserService;
+import com.example.WebAppClient.Model.Business;
+import com.example.WebAppClient.Service.BusinessService;
 
 @Controller
-public class UserController {
+public class BusinessController {
 
     @Autowired
-    UserService userService;
+    BusinessService businessService;
 
     @Autowired
     WebClient webClient;
 
-    @GetMapping("/users")                                                                  
+    @GetMapping("/business")                                                                  
     public String viewAllUsers(Model model) {
-        List <User> allusers = userService.getUserList();
+        List <Business> allusers = businessService.getUserList();
         System.out.println (allusers.size());
-        return "index";
+        return "menu";
     }
 
 
 
 
     //Testing
-    @GetMapping("/users")
+    @GetMapping("/home")
     @ResponseBody                                                                   //use ResponseBody to send data in json format while using normal controller
     public ArrayList<String> viewHomePage(Model model) {
-        // List <User> allusers = userService.getUserList();
-        // System.out.println (allusers.size());
         return new ArrayList<String>();
     }
 
@@ -51,6 +49,4 @@ public class UserController {
                         .bodyToMono(String.class)
                         .block(); 
     }
-    
-    
 }

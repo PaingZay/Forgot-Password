@@ -10,12 +10,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -45,8 +46,5 @@ public class Collection {
 
     @OneToMany (mappedBy = "collection")
     List<Item> items;
-
-    @OneToOne (mappedBy = "Collection")
-    List<Receiver> receiver;
 
 }

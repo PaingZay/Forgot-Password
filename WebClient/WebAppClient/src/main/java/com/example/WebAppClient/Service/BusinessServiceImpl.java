@@ -8,7 +8,8 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
 import org.springframework.web.reactive.function.client.WebClient;
-import com.example.WebAppClient.Model.User;
+
+import com.example.WebAppClient.Model.Business;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -17,14 +18,14 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class BusinessServiceImpl implements BusinessService {
 
     private static final Logger LOGGER = Logger.getLogger(Service.class.getName());
 
     @Autowired
     WebClient webClient;
 
-    public UserServiceImpl(@Value("${content-service}") String baseURL) {
+    public BusinessServiceImpl(@Value("${content-service}") String baseURL) {
         this.webClient = WebClient.builder()
                 .baseUrl(baseURL)
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
@@ -46,13 +47,13 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public List<User> getUserList() {
-        Flux<User> retrievedMemberList = webClient.get()
+    public List<Business> getUserList() {
+        Flux<Business> retrievedMemberList = webClient.get()
                 .uri("/users")
                 .accept(MediaType.APPLICATION_JSON)
                 .exchangeToFlux(response -> {
                     if (response.statusCode().equals(HttpStatus.OK)) {
-                        return response.bodyToFlux(User.class);
+                        return response.bodyToFlux(Business.class);
                     } else {
                         return response.createException().flatMapMany(Flux::error);
                     }
@@ -62,13 +63,13 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public User getUserbyId (int id) {
-        Mono<User> retrievedMember = webClient.get() 
+    public Business getUserbyId (int id) {
+        Mono<Business> retrievedMember = webClient.get() 
                 .uri("/users/" + id)
                 .accept(MediaType.APPLICATION_JSON)
                 .exchangeToMono(response -> {
                     if (response.statusCode().equals(HttpStatus.OK)) {
-                        return response.bodyToMono(User.class);
+                        return response.bodyToMono(Business.class);
                     } else {
                         return response.createException().flatMap(Mono::error);
                     }
