@@ -26,5 +26,5 @@ public class apiConfig {
                         .termsOfService("TOC")
                         .license(new License().name("License").url("#")));
     }
-    
+
 }

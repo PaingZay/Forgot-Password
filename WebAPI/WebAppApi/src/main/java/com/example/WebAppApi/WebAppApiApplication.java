@@ -12,7 +12,16 @@ import com.example.WebAppApi.Model.User;
 import com.example.WebAppApi.Repository.BusinessRepository;
 import com.example.WebAppApi.Repository.UserRepository;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.servers.Server;
+
 @SpringBootApplication
+
+@OpenAPIDefinition(servers = {
+	@Server(url = "http://localhost:8081", description = "embedded API webserver"),
+	@Server(url = "http://192.168.1.116:8081", description = "localhost API webserver")
+})
+
 public class WebAppApiApplication {
 
 	public static void main(String[] args) {

@@ -2,11 +2,11 @@ package com.example.WebAppApi.Model;
 
 import java.time.LocalTime;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -38,10 +38,11 @@ public class Business {
 
     private LocalTime closingTime;
 
-    @OneToOne
-    private User user;
+    // @OneToOne
+    // private User user;
 
-    public Business(String businessName, String branch, String businessType, String address, String postalCode, String contactNumber, String[] openingDays, LocalTime openingTime, LocalTime closingTime)
+    public Business(String businessName, String branch, String businessType, String address, String postalCode, String contactNumber, 
+                    String[] openingDays, LocalTime openingTime, LocalTime closingTime)
     {
         this.businessName = businessName;
         this.branch = branch;
