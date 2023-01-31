@@ -48,8 +48,8 @@ public class BusinessServiceImpl implements BusinessService {
 
     @Override
     public List<Business> getUserList() {
-        Flux<Business> retrievedMemberList = webClient.get()
-                .uri("/users")
+        Flux<Business> retrievedBusinessList = webClient.get()
+                .uri("/business")
                 .accept(MediaType.APPLICATION_JSON)
                 .exchangeToFlux(response -> {
                     if (response.statusCode().equals(HttpStatus.OK)) {
@@ -58,14 +58,14 @@ public class BusinessServiceImpl implements BusinessService {
                         return response.createException().flatMapMany(Flux::error);
                     }
                 });
-        return retrievedMemberList.collectList().block();
+        return retrievedBusinessList.collectList().block();
     }
 
 
     @Override
     public Business getUserbyId (int id) {
         Mono<Business> retrievedMember = webClient.get() 
-                .uri("/users/" + id)
+                .uri("/business/" + id)
                 .accept(MediaType.APPLICATION_JSON)
                 .exchangeToMono(response -> {
                     if (response.statusCode().equals(HttpStatus.OK)) {
