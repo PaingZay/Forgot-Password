@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.WebAppApi.Model.User;
-import com.example.WebAppApi.Service.UserService;
+import com.example.WebAppApi.Model.Business;
+import com.example.WebAppApi.Service.BusinessService;
 
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
@@ -22,10 +22,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 @RestController
 @RequestMapping("/api")
-public class UserController {
+public class BusinessController {
 
     @Autowired 
-    private UserService userService;
+    private BusinessService userService;
     
 
     @ApiResponses(value = {
@@ -36,10 +36,10 @@ public class UserController {
                     @Content(examples = { @ExampleObject(value = "") }) }) })
     
 
-    @GetMapping("/users")
-    public ResponseEntity<List<User>> getAllUsers() {
+    @GetMapping("/business")
+    public ResponseEntity<List<Business>> getAllUsers() {
         try {
-            List<User> users = new ArrayList<User>();
+            List<Business> users = new ArrayList<Business>();
             users = userService.getUserList();
 
             if (users.isEmpty()) {
@@ -51,8 +51,8 @@ public class UserController {
         }
     }    
     
-    @GetMapping("/users/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable("id") int id){
+    @GetMapping("/business/{id}")
+    public ResponseEntity<Business> getUserById(@PathVariable("id") int id){
         return userService.getUserbyId(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());

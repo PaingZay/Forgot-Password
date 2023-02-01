@@ -4,34 +4,32 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Entity
+
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
-@Table (name = "Users")
-public class User 
-{
+@Entity
+@Table (name = "Items")
+public class Item {
 
-	@Id
+    @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	private String emailAddress;
-
-    private String password;
-
     private String category;
 
-    public User (){
+    private int period;
 
-    }
+    private String description;
 
-    public User (String emailAddress, String password, String category){
-        this.emailAddress = emailAddress;
-        this.password = password;
-        this.category = category;
-    }
-
+    // @ManyToOne 
+    // private Collection collection;
+    
 }

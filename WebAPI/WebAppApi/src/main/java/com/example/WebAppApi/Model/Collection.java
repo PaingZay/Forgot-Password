@@ -1,4 +1,4 @@
-package com.example.WebAppClient.Model;
+package com.example.WebAppApi.Model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,6 +22,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
+@Table (name = "Collections")
 public class Collection {
 
     @Id
@@ -42,7 +44,18 @@ public class Collection {
     @ManyToOne
     private Business business;
 
-    @OneToMany (mappedBy = "collection")
-    List<Item> items;
+    // @OneToMany (mappedBy = "collection")
+    // List<Item> items;
+
+    public Collection (String packageName, int quantity, LocalTime start, LocalTime end, LocalDate pickUpDate, String description, Business business)
+    {
+        this.packageName = packageName;
+        this.quantity = quantity;
+        this.start = start;
+        this.end = end;
+        this.pickUpDate = pickUpDate;
+        this.description = description;
+        this.business = business;
+    }
 
 }
