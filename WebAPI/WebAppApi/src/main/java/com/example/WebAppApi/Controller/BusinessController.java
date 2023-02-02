@@ -20,12 +20,18 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import io.swagger.v3.oas.annotations.Operation;
+
+
 @RestController
 @RequestMapping("/api")
 public class BusinessController {
 
     @Autowired 
-    private BusinessService userService;
+    private BusinessService businessService;
+
     
 
     @ApiResponses(value = {
@@ -40,7 +46,7 @@ public class BusinessController {
     public ResponseEntity<List<Business>> getAllUsers() {
         try {
             List<Business> users = new ArrayList<Business>();
-            users = userService.getUserList();
+            users = businessService.getUserList();
 
             if (users.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -53,9 +59,22 @@ public class BusinessController {
     
     @GetMapping("/business/{id}")
     public ResponseEntity<Business> getUserById(@PathVariable("id") int id){
-        return userService.getUserbyId(id)
+        return businessService.getUserbyId(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
-  
+    
+    @Operation(summary = "Create new business", description = "create a new member")
+    @PostMapping("/business")
+    public ResponseEntity<Business> saveBusiness(@RequestBody Business business){
+        try{
+            Business savedBusiness = businessService.createBusiness(business);
+            
+            return new ResponseEntity<>(savedBusiness, HttpStatus.CREATED);
+        }
+        catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
+;

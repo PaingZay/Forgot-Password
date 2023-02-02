@@ -12,27 +12,28 @@
           style="min-height: 100vh">
           <div class="col-md-12">
             <center><div class = "card" style="width:25rem;">
-                <form method="post" th:action="@{'/login'}">
-                   <fieldset class="form-group p-3">  
-                    
-                    <div class="form-group text-center">
-                        <input type="text" name="username" placeholder="username">
-                    </div>   
-        
-                    <div class="form-group text-center">
-                        <input type="text" name="password" placeholder="password">
-                    </div>       
-                    
-                    <td>&nbsp;</td>
-                      <td>
-                        <input class="btn btn-secondary" type="submit" value="Sign In"> 
-                      </td>
-                      
-                    </fieldset>    
-                </form>
+      
+              <form method="post" th:action="@{'/login'}" th:object="${formData}">
+              <fieldset class="form-group p-3">
+              <div class="form-group text-center">
+              <input th:field="*{email}" type="text" name="username" placeholder="username">
+              </div>
+              <div class="form-group text-center">
+              <input th:field="*{password}" type="password" name="password" placeholder="password">
+              </div>
+              <td>&nbsp;</td>
+              <td>
+              <input class="btn btn-secondary" type="submit" value="Sign In">
+              </td>
+              </fieldset>
+              </form>
+              
+              
+              
+              
 
-                <p class="text-center">Haven't Registered? Sign Up <a href="http://localhost:8083/register" class="link-primary">Here!</a></p>
-                </div></center>
+              <p class="text-center">Haven't Registered? Sign Up <a href="http://localhost:8083/register" class="link-primary">Here!</a></p>
+              </div></center>
           </div>
         </div>
       </div>

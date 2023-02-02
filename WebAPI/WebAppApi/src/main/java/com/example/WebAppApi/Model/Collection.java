@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -44,7 +45,7 @@ public class Collection {
     @ManyToOne
     private Business business;
 
-    // @OneToMany (mappedBy = "collection")
+    // @ManyToMany (mappedBy = "collection")
     // List<Item> items;
 
     public Collection (String packageName, int quantity, LocalTime start, LocalTime end, LocalDate pickUpDate, String description, Business business)

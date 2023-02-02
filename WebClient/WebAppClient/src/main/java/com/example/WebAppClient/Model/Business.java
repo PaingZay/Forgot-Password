@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,7 +28,7 @@ public class Business
 
 	private String emailAddress;
     private String password;
-    private String category;
+    private String category = "Coporate User";
     private String businessName;
     private String branch;
     private String businessType;
@@ -34,7 +36,10 @@ public class Business
     private String postalCode;
     private String contactNumber;
     private String[] openingDays;
+    
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime openingTime;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime closingTime;
 
     @OneToMany (mappedBy = "business")
@@ -42,7 +47,7 @@ public class Business
 
 
     public Business (String emailAddress, String password, String category, String businessName, String branch, String businessType, String address, 
-                String postalCode, String contactNumber, String[] openingDays, LocalTime openingTime, LocalTime closingTime) 
+                    String postalCode, String contactNumber, String[] openingDays, LocalTime openingTime, LocalTime closingTime) 
     {
 
         this.emailAddress = emailAddress;
@@ -57,6 +62,7 @@ public class Business
         this.openingDays = openingDays;
         this.openingTime = openingTime;
         this.closingTime = closingTime;
+
     }
 }
 

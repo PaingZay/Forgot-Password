@@ -14,6 +14,7 @@ import com.example.WebAppClient.Model.Business;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -75,7 +76,17 @@ public class BusinessServiceImpl implements BusinessService {
                     }
                 });
         return retrievedMember.block(); 
+    }
 
+
+    @Override 
+    public Business create (Business business){
+        Mono<Business> createdBusiness = webClient.post()
+                                                  .uri("/business")
+                                                  .body(Mono.just(business), Business.class)
+                                                  .retrieve().bodyToMono(Business.class)
+                                                  .timeout(Duration.ofMillis(10_000));
+        return createdBusiness.block();
     }
 
 }

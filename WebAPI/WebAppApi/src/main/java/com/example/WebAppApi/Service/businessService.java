@@ -9,7 +9,7 @@ import com.example.WebAppApi.Model.Business;
 
 public interface BusinessService {
 
-    Business createUser (Business business);
+    Business createBusiness (Business business);
     List<Business> getUserList ();
     Optional<Business> getUserbyId (int id);
 }

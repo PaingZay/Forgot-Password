@@ -8,4 +8,5 @@ public interface BusinessService {
 
     List<Business> getUserList ();
     Business getUserbyId (int id);
+    Business create (Business business);
 }

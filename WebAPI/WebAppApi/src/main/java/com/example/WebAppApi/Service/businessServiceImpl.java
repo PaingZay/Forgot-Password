@@ -18,7 +18,7 @@ public class BusinessServiceImpl implements BusinessService {
     private BusinessRepository businessRepository;
 
     @Override
-    public Business createUser(Business business) {
+    public Business createBusiness(Business business) {
         return businessRepository.saveAndFlush(business);
     }  
 
