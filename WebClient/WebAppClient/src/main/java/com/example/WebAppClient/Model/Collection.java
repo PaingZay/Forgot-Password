@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,7 +22,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Entity
 public class Collection {
 
     @Id
@@ -34,8 +35,11 @@ public class Collection {
     private LocalTime start;
 
     private LocalTime end;
-
+    
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalDate pickUpDate;
+
+    private String status = "Pending";
 
     private String description;
 

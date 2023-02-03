@@ -13,7 +13,7 @@
           <div class="col-md-12">
             <center><div class = "card" style="width:25rem;">
       
-              <form method="post" th:action="@{'/login'}" th:object="${formData}">
+              <form method="post" th:action="@{'/authenticate'}" th:object="${formData}">
               <fieldset class="form-group p-3">
               <div class="form-group text-center">
               <input th:field="*{email}" type="text" name="username" placeholder="username">

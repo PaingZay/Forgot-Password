@@ -1,6 +1,7 @@
 package com.example.WebAppClient;
 
 import java.time.LocalTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -20,7 +21,7 @@ public class WebAppClientApplication {
 		SpringApplication.run(WebAppClientApplication.class, args);
 	}
 		@Bean
-		CommandLineRunner commandLineRun(BusinessService busienssService) {
+		CommandLineRunner commandLineRun(BusinessService businessService) {
 		  return args -> {
 	
 			//   String[] openingDays = {"Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"};
@@ -39,6 +40,12 @@ public class WebAppClientApplication {
 			//   Collection c1 = new Collection ("Package 1", 1, start, end, pickup, "Breads", buz1);
 			//   List <Collection> collections = new ArrayList<>();
 			//   collections.add(c1);
+
+			List<Business> blist = businessService.getUserList();
+			if (blist != null)
+			{
+				System.out.println ("not null");
+			}
 		  };
 	}
 }

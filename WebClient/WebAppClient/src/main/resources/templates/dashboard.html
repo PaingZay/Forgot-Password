@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Registration Page</title>
+<title>Dashboard</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" rel="stylesheet" >
@@ -10,7 +10,183 @@
 </head>
 
 <body>
-   
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand">FoodShare</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-  icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="http://localhost:8083/business/dashboard">Dashboard <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="http://localhost:8083/business/profile">Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Calender</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Menu</a>
+              </li>
+              <li class="notificaton">
+                <a class="nav-link" href="#">Notification </a>
+              </li>
+            </ul>
+            <span class="nav-item">
+                <a class="nav-link" href="#">Sign Out </a>
+            </span>
+        </nav> 
+
+
+
+
+        <div class="container">
+            <div class="row align-items-center" style="min-height: 90vh">
+              
+            <div class="row row-cols-1 row-cols-lg-2 g-4">
+
+                <div class="col">
+                    <h6 class="card-title" >Request for Collection</h6>
+                    <center>
+                        <div class = "card" style="width:32.5rem;"> 
+                        </br>   
+                            
+                            <div class="card-body">
+                                
+                              <form method="post" action="#">
+                                    
+                                    <form class="form-group" style="width:32rem;">
+                                        
+                                        <div class="row justify-content-between text-left">
+                                            <div class="form-group col-sm-6 flex-column d-flex"> <input type="text" id="packageName" placeholder="Package Name"> </div>
+                                            <div class = "mx-auto">
+                                                <td><label for="days"></label></td>
+                                                <td>
+                                                  <select class="selectpicker" size = "01" multiple="multiple" id="items" style="width:15rem; height: 1.8em;">
+                                                    <option>Select Items</option>
+                                                    <option th:each="item:${items}" th:value="${item.name}" th:text="${item.name}">Items</option>
+                                                  </select>
+                                                </td>
+                                              </tr>
+                                              </div>      
+                                        </div>
+                                        
+                                        <div class="row justify-content-between text-left">
+                                            <div class="form-group col-sm-6 flex-column d-flex">
+                                                <input min="1" max="10" type="number" id="typeNumber" class="form-control" placeholder="Enter Amount" />
+                                            </div>
+                                            <div class = "mx-auto">
+                                                <select class="selectpicker" style="width:15rem; height:2.3rem;">                                                                       
+                                                    <option value="Bread" th:text="Bread"></option>
+                                                    <option value="Cake" th:text="Cake"></option>
+                                                    <option value="Coffee" th:text="Coffee"></option>
+                                                </select>
+                                            </div>       
+                                        </div>
+        
+                                        <div class="row justify-content-between text-left">
+                                            <div class="form-group col-sm-4 flex-column d-flex" >
+                                                <input class="form-control" type="time" id="startTime" />
+                                            </div>    
+                                            <div class="form-group col-sm-4 flex-column d-flex" >
+                                                <input class="form-control" type="time" id="endTime" />
+                                            </div>  
+                                            <div class="form-group col-sm-4  flex-column d-flex">
+                                                <input class="form-control" type="date" id="date" placeholder="Choose Date" />
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row justify-content-between text-left">
+                                            <div class="form-group col-sm-5 flex-column d-flex"><a>Description</a> <input type="text" id="packageName" style = "width:30rem; height:10rem;"> </div>
+                                        </div>
+                                        </br>
+        
+                                        <td>&nbsp;</td>
+                                        <td>
+                                          <input class="btn btn-secondary" type="submit" value="Submit"> 
+                                        </td>
+                                    </div>
+                                    </form>
+                                </form>
+                            </div>               
+                        </div></center>
+                </div>
+
+               
+                <div class="col">
+                    <h6 class="card-title" >Pending for Collection</h6>
+                        <center>
+                            <div class = "card" style="width:36.5rem; height:8rem;"> 
+                            </br>   
+                                
+                                <div class="card-body">
+                                <form method="post" action="#">
+                                        <form class="form-group" style="width:30rem;">
+                                            <table class="table table-striped">
+                                                
+                                                <tbody>
+                                                  <tr th:each="collection : ${pending}">
+                                                      <td class="align-middle" th:text="${collection.id}"></td>
+                                                      <td class="align-middle" th:text="${collection.packageName}"></td>
+                                                      <td class="align-middle" th:text="${collection.pickupDay}"></td>
+                                                      <td class="align-middle" th:text="${collection.status}"></td>
+                                
+                                                      
+                                                      <td><a th:href="@{/collection/collected/}+${collection.id}" class="btn btn-secondary">Collected</a></td>
+                                                      <td><a th:href="@{/collection/cancel/}+${collection.id}" class="btn btn-secondary">Cancel</a></td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                        </form>
+                
+                                    </form>
+                                </div>               
+                            </div>
+                        </center>
+
+                        <h6 class="card-title" >History</h6>
+                        <center>
+                            <div class = "card" style="width:36.5rem; height:20rem;"> 
+                            </br>   
+                                
+                                <div class="card-body">
+                                  <form method="post" action="#">
+                
+                             
+                                        <form class="form-group" style="width:30rem;">
+                                            <table class="table table-striped">
+                                                
+                                                <tbody>
+                                                    <tr th:each="collection : ${history}">
+                                                        <td class="align-middle" th:text="${collection.id}"></td>
+                                                        <td class="align-middle" th:text="${collection.packageName}"></td>
+                                                        <td class="align-middle" th:text="${collection.pickupDay}"></td>
+                                                        <td class="align-middle" th:text="${collection.status}"></td>
+                                                        <td class="align_middle"><a class="nav-link" th:href="@{/collection/details/}+${collection.id}">Details</a></td>
+                                                  </tr>
+                                                </tbody>
+                                            </table>
+                                        </form>
+                
+                                    </form>
+                                </div>               
+                            </div>
+                        </center>
+                </div>
+              </div>
+            </div>  
+
+
+            
+          </div>  
+        </div> 
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#example-getting-started').multiselect();
+    });
+</script>      
 </body>
 
 </html>

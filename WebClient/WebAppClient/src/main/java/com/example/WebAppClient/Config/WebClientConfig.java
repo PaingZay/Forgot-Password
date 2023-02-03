@@ -18,7 +18,7 @@ public class WebClientConfig {
 
         return webClientBuilder
                 .clientConnector(new ReactorClientHttpConnector(getHttpClient()))
-                // .baseUrl("https://foodshare-376109.uc.r.appspot.com")
+                // .baseUrl("https://card-service-cloudrun-lmgpq3qg3a-et.a.run.app/card-service")
                 .baseUrl("http://localhost:8081/api")
                 .build();
     }

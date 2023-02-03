@@ -82,7 +82,7 @@ public class BusinessServiceImpl implements BusinessService {
     @Override 
     public Business create (Business business){
         Mono<Business> createdBusiness = webClient.post()
-                                                  .uri("/business")
+                                                  .uri("/business")                                         //endpoint name of api
                                                   .body(Mono.just(business), Business.class)
                                                   .retrieve().bodyToMono(Business.class)
                                                   .timeout(Duration.ofMillis(10_000));

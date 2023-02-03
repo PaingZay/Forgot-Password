@@ -42,12 +42,12 @@ public class WebAppApiApplication {
 		  Business buz1  = new Business("breadtalk.amk@gmail.com","asdf","Corporate User","BreadTalk","Singapore","Bakery","Ang Mo Kio Hub", "123456" , "90844877", openingDays, openingTime, closingTime);
 		  BusinessRepo.save(buz1);
 
-		//   LocalTime start =  LocalTime.of(10,00,00);
-		//   LocalTime end =  LocalTime.of(16,00,00);
-		//   LocalDate pickup = LocalDate.now();
-		//   Collection c1 = new Collection ("Package 1", 1, start, end, pickup, "Breads", buz1);
-		//   List <Collection> collections = new ArrayList<>();
-		//   collections.add(c1);
+		  LocalTime start =  LocalTime.of(10,00,00);
+		  LocalTime end =  LocalTime.of(16,00,00);
+		  LocalDate pickup = LocalDate.now();
+		  Collection c1 = new Collection ("Package 1", 1, start, end, pickup, "Breads", buz1);
+		  List <Collection> collections = new ArrayList<>();
+		  collections.add(c1);
 	  };
 	}
 
