@@ -20,7 +20,7 @@
             </br>   
                 <h5 class="card-title" >Business Information</h5>
                 <div class="card-body">
-                  <form method="post" action="#" th:action="@{/register}" th:object="${business}">
+                  <form method="post" action="#" th:action="@{/business/register}" th:object="${business}">
 
                     <center>
                         <form class="form-group" style="width:30rem;">
@@ -49,39 +49,42 @@
         
         
                             <div class="row justify-content-between text-left">
-                              <div class="form-group col-sm-6 flex-column d-flex"> <input type="text" id="emailAddress" th:field="*{emailAddress}" placeholder="Email Address"> </div>
+                              <div class="form-group col-sm-6 flex-column d-flex"> <input type="text" id="email" th:field="*{email}" placeholder="Email Address"> </div>
                               <div class="form-group col-sm-6 flex-column d-flex"> <input type="password" id="password" th:field="*{password}" placeholder="Password"> </div>
                             </div>
         
-        
+                          </br>
+                            <h6 class="card-title" >Opening Days & Hours</h6>
+                          </br>
                             <div class="row justify-content-center text-left">
-                              <div class = "mx-auto">
-                                <td><label for="days">Opening Days:</label></td>
-                                <td>
-                                  <select multiple="multiple" name="days" id="days" style = "width:8.2rem;">
-                                    <option th:each="day:${days}" th:value="${day.name}" th:text="${day.name}">Opening Days</option>
-                                  </select>
-                                </td>
-                              </tr>
-                              </div>      
+                              <div class = "mx-auto" style="text-align:center;">
+                                  <label style="margin-right:5px"> Mon <input type="checkbox" name="openingDays" id="monday" value="monday" /> </label>
+							                    <label style="margin-right:5px"> Tue <input type="checkbox" name="openingDays" value="tuesday" /> </label>
+							                    <label style="margin-right:5px"> Wed <input type="checkbox" name="openingDays" value="wednesday" /> </label>
+							                    <label style="margin-right:5px"> Thur <input type="checkbox" name="openingDays" value="thursday" /> </label>
+							                    <label style="margin-right:5px"> Fri <input type="checkbox" name="openingDays" value="friday" /> </label>
+							                    <label style="margin-right:5px"> Sat <input type="checkbox" name="openingDays" value="saturday" /> </label>
+							                    <label style="margin-right:5px"> Sun <input type="checkbox" name="openingDays" value="sunday" /> </label> 
+                              </div>
+                            </div>
+
+
+                            <div class="row justify-content-center text-left">    
                               <div class="form-group col-sm-6 flex-column d-flex" style="margin-top: 20px">
                                 <input class="form-control" type="time" id="openingTime" th:field="*{openingTime}"/>
+                              </div> 
+                              <div class="form-group col-sm-6 flex-column d-flex" style="margin-top: 20px">
                                 <input class="form-control" type="time" id="closingTime" th:field="*{closingTime}"/>
                               </div>                                                
                             </div>
-        
-                            
-                            <div class="row justify-content-between text-center">
-                    
-
-                            </div>
+    
         
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="fri" value="fri" />
                                 <label class="form-check-label" for="fri">I accept FoodShare's Privacy Policy</label>
                             </div>
                             
-                        </br>
+                            </br>
                             <td>&nbsp;</td>
                             <td>
                               <input class="btn btn-secondary" type="submit" value="Sign Up">

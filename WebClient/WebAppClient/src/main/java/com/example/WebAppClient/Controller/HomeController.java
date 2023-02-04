@@ -2,6 +2,8 @@ package com.example.WebAppClient.Controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,8 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import com.example.WebAppClient.Model.Dummy;
-import com.example.WebAppClient.Model.FormData;
+import com.example.WebAppClient.DTO.FormData;
+import com.example.WebAppClient.Model.Business;
 import com.example.WebAppClient.Service.HomeService;
 
 import reactor.core.publisher.Mono;
@@ -39,11 +41,19 @@ public class HomeController {
     }
 
     @PostMapping("/login")
-    public String loginPost(@ModelAttribute FormData formData) {
-        if(homeService.authenticate(formData.getEmail(),formData.getPassword())) {
-         return "dashboard";
+    public String loginPost(@ModelAttribute FormData formData, HttpSession session) {
+        Business business = homeService.authenticate(formData);
+        if(business!=null) {
+         session.setAttribute("email", business.getEmail()); //set session
+         return "menu";
         }
     return "login";
+    }
+    
+    @GetMapping("/logout")
+    public String logout(HttpSession session, @ModelAttribute FormData formData) {
+    	session.invalidate();
+        return "login";
     }
 
 

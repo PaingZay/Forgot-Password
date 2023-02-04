@@ -23,13 +23,30 @@ public class Item {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
+    private String name;
+
     private String category;
 
     private int period;
 
     private String description;
 
-    // @ManyToOne 
-    // private Collection collection;
+    @ManyToOne 
+    private FoodWastePackage foodwastepackage;
+
+    public Item (String name, String category, int period, String description){
+        this.name = name;
+        this.category = category;
+        this.period = period;
+        this.description = description;
+    }
+
+    public Item (String name, String category, int period, String description, FoodWastePackage foodwastepackage){
+        this.name = name;
+        this.category = category;
+        this.period = period;
+        this.description = description;
+        this.foodwastepackage = foodwastepackage;
+    }
     
 }

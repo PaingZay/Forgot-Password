@@ -11,5 +11,5 @@ public interface BusinessService {
 
     Business createBusiness (Business business);
     List<Business> getUserList ();
-    Optional<Business> getUserbyId (int id);
+    Optional<Business> getUserbyId (Long id);
 }

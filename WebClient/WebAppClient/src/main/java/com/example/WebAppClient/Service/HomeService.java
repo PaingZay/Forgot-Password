@@ -1,7 +1,10 @@
 package com.example.WebAppClient.Service;
 
+import com.example.WebAppClient.DTO.FormData;
+import com.example.WebAppClient.Model.Business;
+
 public interface HomeService {
 
-    boolean authenticate(String email, String password);
+    Business authenticate (FormData formData);
 
 }

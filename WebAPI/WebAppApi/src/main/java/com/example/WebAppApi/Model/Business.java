@@ -14,8 +14,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
 @Entity
 @Table (name = "Businesses")
@@ -24,35 +24,33 @@ public class Business
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private long id;
 
-	private String emailAddress;
+	private String email;
     private String password;
-    private String category;
     private String businessName;
-    private String branch;
     private String businessType;
+    private String branch;
     private String address;
     private String postalCode;
     private String contactNumber;
-    private String[] openingDays;
+    private String openingDays;
     private LocalTime openingTime;
     private LocalTime closingTime;
 
     @OneToMany (mappedBy = "business")
-    List <Collection> collections;
+    List <FoodWastePackage> collections;
 
 
-    public Business (String emailAddress, String password, String category, String businessName, String branch, String businessType, String address, 
-                    String postalCode, String contactNumber, String[] openingDays, LocalTime openingTime, LocalTime closingTime) 
+    public Business (String email, String password, String businessName, String branch, String businessType, String address, 
+                     String postalCode, String contactNumber, String openingDays, LocalTime openingTime, LocalTime closingTime) 
     {
 
-        this.emailAddress = emailAddress;
+        this.email = email;
         this.password = password;
-        this.category = category;
         this.businessName = businessName;
         this.branch = branch;
-        this.branch = businessType;
+        this.businessType = businessType;
         this.address = address;
         this.postalCode = postalCode;
         this.contactNumber = contactNumber;

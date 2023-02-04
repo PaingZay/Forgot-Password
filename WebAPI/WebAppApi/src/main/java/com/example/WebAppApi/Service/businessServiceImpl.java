@@ -28,7 +28,7 @@ public class BusinessServiceImpl implements BusinessService {
     }
 
     @Override 
-    public Optional<Business> getUserbyId (int id) {
+    public Optional<Business> getUserbyId (Long id) {
         return businessRepository.findById(id);
     }
 }

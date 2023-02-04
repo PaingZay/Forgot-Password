@@ -58,7 +58,7 @@
         
                                         <div class="row">
                                             <div class="col-sm-3"> <p class="mb-0">Email</p> </div>
-                                            <div class="col-sm-8"> <td class="align-middle" th:text="${business.emailAddress}"></td> </div>
+                                            <div class="col-sm-8"> <td class="align-middle" th:text="${business.email}"></td> </div>
                                         </div>
                                         <hr>
         
@@ -82,11 +82,7 @@
         
                                         <div class="row">
                                             <div class="col-sm-3"> <p class="mb-0">Opening Days</p> </div>
-                                            <div class="col-sm-8"> <tr th:each="day : ${openingDays}">
-                                                                    <td class="align-middle" th:text="${day}"></td>
-                                                                    <td>.</td>
-                                                                </tr>
-                                            </div>
+                                            <div class="col-sm-8"> <td class="align-middle" th:text="${business.openingDays}"></td> </div>
                                         </div>
                                         <hr>
         

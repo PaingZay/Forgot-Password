@@ -34,7 +34,7 @@
               </li>
             </ul>
             <span class="nav-item">
-                <a class="nav-link" href="#">Sign Out </a>
+                <a class="nav-link" href="http://localhost:8083/logout">Sign Out </a>
             </span>
         </nav> 
 
@@ -54,12 +54,12 @@
                             
                             <div class="card-body">
                                 
-                              <form method="post" action="#">
+                              <form method="post" action="#" th:action="@{/business/dashboard}" th:object = "${collection}">
                                     
                                     <form class="form-group" style="width:32rem;">
                                         
                                         <div class="row justify-content-between text-left">
-                                            <div class="form-group col-sm-6 flex-column d-flex"> <input type="text" id="packageName" placeholder="Package Name"> </div>
+                                            <div class="form-group col-sm-6 flex-column d-flex"> <input type="text" id="packageName" placeholder="Package Name" th:field="*{packageName}"> </div>
                                             <div class = "mx-auto">
                                                 <td><label for="days"></label></td>
                                                 <td>
@@ -74,10 +74,10 @@
                                         
                                         <div class="row justify-content-between text-left">
                                             <div class="form-group col-sm-6 flex-column d-flex">
-                                                <input min="1" max="10" type="number" id="typeNumber" class="form-control" placeholder="Enter Amount" />
+                                                <input min="1" max="10" type="number" id="typeNumber" class="form-control" placeholder="Enter Amount" th:field="*{quantity}" />
                                             </div>
                                             <div class = "mx-auto">
-                                                <select class="selectpicker" style="width:15rem; height:2.3rem;">                                                                       
+                                                <select class="selectpicker" style="width:15rem; height:2.3rem;" th:field="*{category}" >                                                                       
                                                     <option value="Bread" th:text="Bread"></option>
                                                     <option value="Cake" th:text="Cake"></option>
                                                     <option value="Coffee" th:text="Coffee"></option>
@@ -87,13 +87,13 @@
         
                                         <div class="row justify-content-between text-left">
                                             <div class="form-group col-sm-4 flex-column d-flex" >
-                                                <input class="form-control" type="time" id="startTime" />
+                                                <input class="form-control" type="time" id="startTime" th:field="*{start}" />
                                             </div>    
                                             <div class="form-group col-sm-4 flex-column d-flex" >
-                                                <input class="form-control" type="time" id="endTime" />
+                                                <input class="form-control" type="time" id="endTime" th:field="*{end}" />
                                             </div>  
                                             <div class="form-group col-sm-4  flex-column d-flex">
-                                                <input class="form-control" type="date" id="date" placeholder="Choose Date" />
+                                                <input class="form-control" type="date" id="date" placeholder="Choose Date" th:field="*{pickUpDate}" />
                                             </div>
                                         </div>
                                         

@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
-
 public class Item {
 
     @Id
@@ -30,13 +29,21 @@ public class Item {
 
     private String description;
 
-    // @ManyToOne 
-    // private Collection collection;
-    
+    @ManyToOne 
+    private FoodWastePackage foodwastepackage;
+
     public Item (String name, String category, Integer period, String description){
         this.name = name;
         this.category = category;
         this.period = period;
         this.description = description;
+    }
+
+    public Item (String name, String category, Integer period, String description, FoodWastePackage foodwastepackage){
+        this.name = name;
+        this.category = category;
+        this.period = period;
+        this.description = description;
+        this.foodwastepackage = foodwastepackage;
     }
 }

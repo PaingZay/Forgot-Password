@@ -7,6 +7,6 @@ import com.example.WebAppClient.Model.Business;
 public interface BusinessService {
 
     List<Business> getUserList ();
-    Business getUserbyId (int id);
+    Business getUserbyId (Long id);
     Business create (Business business);
 }

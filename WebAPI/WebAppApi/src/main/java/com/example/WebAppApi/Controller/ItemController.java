@@ -7,12 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.WebAppApi.Model.Business;
-import com.example.WebAppApi.Service.BusinessService;
+import com.example.WebAppApi.Model.Item;
+import com.example.WebAppApi.Service.ItemService;
 
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
@@ -26,10 +25,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/api")
-public class BusinessController {
+public class ItemController {
 
     @Autowired 
-    private BusinessService businessService;
+    private ItemService itemService;
 
     
 
@@ -41,34 +40,28 @@ public class BusinessController {
                     @Content(examples = { @ExampleObject(value = "") }) }) })
     
 
-    @GetMapping("/business/get-list")
-    public ResponseEntity<List<Business>> getUserList() {
+    @GetMapping("/item")
+    public ResponseEntity<List<Item>> getAllItems() {
         try {
-            List<Business> users = new ArrayList<Business>();
-            users = businessService.getUserList();
+            List<Item> items = new ArrayList<Item>();
+            items = itemService.getItemList();
 
-            if (users.isEmpty()) {
+            if (items.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
-            return new ResponseEntity<>(users, HttpStatus.OK);
+            return new ResponseEntity<>(items, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }    
-    
-    @GetMapping("/business/{id}")
-    public ResponseEntity<Business> getUserById(@PathVariable("id") Long id){
-        return businessService.getUserbyId(id)
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
-    }
-    
-    @PostMapping("/business/save")
-    public ResponseEntity<Business> saveBusiness(@RequestBody Business business){
+
+
+    @PostMapping("/item")
+    public ResponseEntity<Item> saveCollection(@RequestBody Item item){
         try{
-            Business savedBusiness = businessService.createBusiness(business);
+            Item savedItem = itemService.createItem(item);
             
-            return new ResponseEntity<>(savedBusiness, HttpStatus.CREATED);
+            return new ResponseEntity<>(savedItem, HttpStatus.CREATED);
         }
         catch (Exception e){
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
