@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.WebAppApi.DTO.FormData;
 import com.example.WebAppApi.Model.Business;
 import com.example.WebAppApi.Service.BusinessService;
 
@@ -58,9 +59,7 @@ public class BusinessController {
     
     @GetMapping("/business/{id}")
     public ResponseEntity<Business> getUserById(@PathVariable("id") Long id){
-        return businessService.getUserbyId(id)
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+        return new ResponseEntity<Business>(businessService.getUserbyId(id), HttpStatus.OK);
     }
     
     @PostMapping("/business/save")
@@ -73,6 +72,20 @@ public class BusinessController {
         catch (Exception e){
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+
+    @PostMapping("/business/authenticate") 
+    public ResponseEntity<Business> authenticate (@RequestBody FormData formData){
+        try{
+            Business authenticatedBusiness = businessService.getUserbyEmail(formData.getEmail(),formData.getPassword());  
+            System.out.print(authenticatedBusiness);
+            return new ResponseEntity<>(authenticatedBusiness, HttpStatus.OK);     
+        }
+        catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 }
 ;

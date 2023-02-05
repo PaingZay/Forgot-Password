@@ -1,14 +1,12 @@
 package com.example.WebAppApi.Model;
 
+import java.io.Serializable;
 import java.time.LocalTime;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,8 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-@Table (name = "Businesses")
-public class Business 
+public class Business implements Serializable
 {
 
 	@Id
@@ -37,10 +34,6 @@ public class Business
     private String openingDays;
     private LocalTime openingTime;
     private LocalTime closingTime;
-
-    @OneToMany (mappedBy = "business")
-    List <FoodWastePackage> collections;
-
 
     public Business (String email, String password, String businessName, String branch, String businessType, String address, 
                      String postalCode, String contactNumber, String openingDays, LocalTime openingTime, LocalTime closingTime) 

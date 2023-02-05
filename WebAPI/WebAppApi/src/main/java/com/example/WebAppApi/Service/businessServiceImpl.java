@@ -1,7 +1,6 @@
 package com.example.WebAppApi.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.annotation.Resource;
 
@@ -28,7 +27,12 @@ public class BusinessServiceImpl implements BusinessService {
     }
 
     @Override 
-    public Optional<Business> getUserbyId (Long id) {
-        return businessRepository.findById(id);
+    public Business getUserbyId (Long id) {
+        return businessRepository.getById(id);
+    }
+
+    @Override 
+    public Business getUserbyEmail (String email, String password) {
+        return businessRepository.getByEmail(email,password);
     }
 }

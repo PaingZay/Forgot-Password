@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.WebAppApi.DTO.RequestCollectionForm;
+import com.example.WebAppApi.Model.Business;
 import com.example.WebAppApi.Model.FoodWastePackage;
+import com.example.WebAppApi.Service.BusinessService;
 import com.example.WebAppApi.Service.FoodWastePackageService;
 
 import io.swagger.v3.oas.annotations.media.Content;
@@ -29,6 +32,10 @@ public class FoodWastePackageController {
 
     @Autowired 
     private FoodWastePackageService foodwastepackageService;
+
+    @Autowired 
+    private BusinessService businessService;
+
 
     
 
@@ -57,10 +64,20 @@ public class FoodWastePackageController {
 
 
     @PostMapping("/foodwastepackage")
-    public ResponseEntity<FoodWastePackage> savePackage(@RequestBody FoodWastePackage foodwastepackage){
+    public ResponseEntity<FoodWastePackage> savePackage(@RequestBody RequestCollectionForm requestcollectionform){
         try{
-            FoodWastePackage savedPackage= foodwastepackageService.createPackage(foodwastepackage);
-            
+            FoodWastePackage newPackage = new FoodWastePackage();
+            newPackage.setPackageName(requestcollectionform.getPackageName());
+            newPackage.setQuantity(requestcollectionform.getQuantity());
+            newPackage.setStart(requestcollectionform.getStart());
+            newPackage.setEnd(requestcollectionform.getEnd());
+            newPackage.setPickUpDate(requestcollectionform.getPickUpDate());
+            newPackage.setDescription(requestcollectionform.getDescription());
+            newPackage.setCategory(requestcollectionform.getCategory());
+            Business business = businessService.getUserbyId(requestcollectionform.getBusinessId());
+            newPackage.setBusiness(business);
+
+            FoodWastePackage savedPackage= foodwastepackageService.createPackage(newPackage);
             return new ResponseEntity<>(savedPackage, HttpStatus.CREATED);
         }
         catch (Exception e){

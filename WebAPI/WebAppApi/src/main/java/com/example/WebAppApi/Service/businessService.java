@@ -1,7 +1,6 @@
 package com.example.WebAppApi.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.example.WebAppApi.Model.Business;
 
@@ -11,5 +10,6 @@ public interface BusinessService {
 
     Business createBusiness (Business business);
     List<Business> getUserList ();
-    Optional<Business> getUserbyId (Long id);
+    Business getUserbyId (Long id);
+    Business getUserbyEmail (String email, String password);
 }

@@ -23,6 +23,7 @@ public class FoodWastePackageServiceImpl implements FoodWastePackageService {
 
     @Override
     public List<FoodWastePackage> getPackageList() {
-        return foodwastepackageRepository.findAll();
+        List<FoodWastePackage> foodwastepackages = foodwastepackageRepository.findAll();
+        return foodwastepackages;
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.example.WebAppClient.Model.Business;
@@ -26,6 +27,11 @@ public class BusinessServiceImpl implements BusinessService {
     public BusinessServiceImpl(@Value("${content-service}") String baseURL) {
         this.webClient = WebClient.builder()
                 .baseUrl(baseURL)
+                .exchangeStrategies(ExchangeStrategies.builder()
+                .codecs(configurer -> configurer
+                  .defaultCodecs()
+                  .maxInMemorySize(16 * 1024 * 1024))
+                  .build())
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .build();
     }

@@ -1,10 +1,11 @@
 package com.example.WebAppClient.Model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,7 +16,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
-public class Item {
+public class Item implements Serializable
+{
 
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,21 +31,11 @@ public class Item {
 
     private String description;
 
-    @ManyToOne 
-    private FoodWastePackage foodwastepackage;
 
     public Item (String name, String category, Integer period, String description){
         this.name = name;
         this.category = category;
         this.period = period;
         this.description = description;
-    }
-
-    public Item (String name, String category, Integer period, String description, FoodWastePackage foodwastepackage){
-        this.name = name;
-        this.category = category;
-        this.period = period;
-        this.description = description;
-        this.foodwastepackage = foodwastepackage;
     }
 }

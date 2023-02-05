@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import com.example.WebAppClient.DTO.RequestCollectionForm;
 import com.example.WebAppClient.Model.FoodWastePackage;
 
 import reactor.core.publisher.Flux;
@@ -49,10 +50,10 @@ public class FoodWastePackageServiceImpl implements FoodWastePackageService {
 
 
     @Override 
-    public FoodWastePackage createPackage (FoodWastePackage foodwastepackages){
+    public FoodWastePackage createPackage (RequestCollectionForm requestcollectionform){
         Mono<FoodWastePackage> createdPackage = webClient.post()
                                                   .uri("/foodwastepackage")                                        
-                                                  .body(Mono.just(foodwastepackages), FoodWastePackage.class)
+                                                  .body(Mono.just(requestcollectionform), RequestCollectionForm.class)
                                                   .retrieve().bodyToMono(FoodWastePackage.class)
                                                   .timeout(Duration.ofMillis(10_000));
         return createdPackage.block();

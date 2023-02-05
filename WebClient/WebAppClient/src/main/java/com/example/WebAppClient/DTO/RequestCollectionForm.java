@@ -1,14 +1,11 @@
-package com.example.WebAppClient.Model;
+package com.example.WebAppClient.DTO;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -17,11 +14,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class FoodWastePackage implements Serializable
+public class RequestCollectionForm 
 {
 
     @Id
@@ -40,12 +36,10 @@ public class FoodWastePackage implements Serializable
     private String description;
     private String category;
     private String[] itemList;
+    private Long businessId;
 
-    @ManyToOne
-    private Business business;
 
-    public FoodWastePackage (String packageName, int quantity, LocalTime start, LocalTime end, LocalDate pickUpDate, String description, String category)
-    {
+    public RequestCollectionForm (String packageName, int quantity, LocalTime start, LocalTime end, LocalDate pickUpDate, String description, String category, Long businessId){
         this.packageName = packageName;
         this.quantity = quantity;
         this.start = start;
@@ -53,18 +47,6 @@ public class FoodWastePackage implements Serializable
         this.pickUpDate = pickUpDate;
         this.description = description;
         this.category = category;
+        this.businessId = businessId;
     }
-
-    public FoodWastePackage (String packageName, int quantity, LocalTime start, LocalTime end, LocalDate pickUpDate, String description, String category, Business business)
-    {
-        this.packageName = packageName;
-        this.quantity = quantity;
-        this.start = start;
-        this.end = end;
-        this.pickUpDate = pickUpDate;
-        this.description = description;
-        this.category = category;
-        this.business = business;
-    }
-
 }
