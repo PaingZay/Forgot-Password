@@ -29,45 +29,45 @@ public class WebAppClientApplication {
 		CommandLineRunner commandLineRun(BusinessService businessService, FoodWastePackageService foodWastePackageService, ItemService itemService) {
 		  return args -> {
 	
-			  String openingDays = "Mon , Tue, Wed, Thur, Fri, Sat, Sun";
-			  LocalTime openingTime =  LocalTime.of(10,00,00);
-			  LocalTime closingTime =  LocalTime.of(16,00,00);
+			//   String openingDays = "Mon , Tue, Wed, Thur, Fri, Sat, Sun";
+			//   LocalTime openingTime =  LocalTime.of(10,00,00);
+			//   LocalTime closingTime =  LocalTime.of(16,00,00);
 	
-			  Business buz1  = new Business("g@gmail.com","asdf12345","BreadTalk","Singapore","Bakery","Ang Mo Kio Hub", "123456" , "90844877", openingDays, openingTime, closingTime);
-			  businessService.create(buz1);
+			//   Business buz1  = new Business("g@gmail.com","asdf12345","BreadTalk","Singapore","Bakery","Ang Mo Kio Hub", "123456" , "90844877", openingDays, openingTime, closingTime);
+			//   businessService.create(buz1);
 	
 
-			  LocalTime start =  LocalTime.of(10,00,00);
-			  LocalTime end =  LocalTime.of(16,00,00);
-			  LocalDate pickup = LocalDate.now();
-			  RequestCollectionForm f1 = new RequestCollectionForm ("Package 10", 1, start, end, pickup, "This package has breads", "Breads",1L);
-			  foodWastePackageService.createPackage(f1);
+			//   LocalTime start =  LocalTime.of(10,00,00);
+			//   LocalTime end =  LocalTime.of(16,00,00);
+			//   LocalDate pickup = LocalDate.now();
+			//   RequestCollectionForm f1 = new RequestCollectionForm ("Package 10", 1, start, end, pickup, "This package has breads", "Breads",1L);
+			//   foodWastePackageService.createPackage(f1);
 
 
-		  	  Item item1 = new Item ("Cheese Cake", "Cake", 3, "This is cheese cake");
-		      itemService.createItem(item1);
+		  	//   Item item1 = new Item ("Cheese Cake", "Cake", 3, "This is cheese cake");
+		    //   itemService.createItem(item1);
 
 
 
 
 
-			  List<Business> blist = businessService.getUserList();
-			  if (blist!=null)
-			  {
-				System.out.println ("User list is not empty");
-			  }
+			//   List<Business> blist = businessService.getUserList();
+			//   if (blist!=null)
+			//   {
+			// 	System.out.println ("User list is not empty");
+			//   }
 			  
-			  List<FoodWastePackage> clist = foodWastePackageService.getPackageList();
-			  if (clist != null)
-			  {
-				System.out.println("Collection List is not empty");
-			  }
+			//   List<FoodWastePackage> clist = foodWastePackageService.getPackageList();
+			//   if (clist != null)
+			//   {
+			// 	System.out.println("Collection List is not empty");
+			//   }
 
-			  List<Item> ilist = itemService.getItemList();
-			  if (ilist != null)
-			  {
-				System.out.println("Item List is not empty");
-			  }
+			//   List<Item> ilist = itemService.getItemList();
+			//   if (ilist != null)
+			//   {
+			// 	System.out.println("Item List is not empty");
+			//   }
 
 
 		  };

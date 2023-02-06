@@ -23,7 +23,7 @@ public class Business implements Serializable
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 
 	private String email;
     private String password;
@@ -59,6 +59,14 @@ public class Business implements Serializable
 
     }
 
-    
+
+    @Override
+    public String toString() {
+        return "Business [id=" + id + ", email=" + email + ", password=" + password + ", businessName=" + businessName
+                + ", branch=" + branch + ", businessType=" + businessType + ", address=" + address + ", postalCode="
+                + postalCode + ", contactNumber=" + contactNumber + ", openingDays=" + openingDays + ", openingTime="
+                + openingTime + ", closingTime=" + closingTime + "]";
+    }
+   
 }
 

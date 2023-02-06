@@ -31,7 +31,6 @@ public class Item implements Serializable
 
     private String description;
 
-
     public Item (String name, String category, Integer period, String description){
         this.name = name;
         this.category = category;

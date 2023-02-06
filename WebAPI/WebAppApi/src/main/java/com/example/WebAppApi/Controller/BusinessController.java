@@ -22,6 +22,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
@@ -42,6 +43,8 @@ public class BusinessController {
                     @Content(examples = { @ExampleObject(value = "") }) }) })
     
 
+
+
     @GetMapping("/business/get-list")
     public ResponseEntity<List<Business>> getUserList() {
         try {
@@ -57,10 +60,16 @@ public class BusinessController {
         }
     }    
     
+
+
+
     @GetMapping("/business/{id}")
     public ResponseEntity<Business> getUserById(@PathVariable("id") Long id){
         return new ResponseEntity<Business>(businessService.getUserbyId(id), HttpStatus.OK);
     }
+
+
+
     
     @PostMapping("/business/save")
     public ResponseEntity<Business> saveBusiness(@RequestBody Business business){
@@ -75,6 +84,8 @@ public class BusinessController {
     }
 
 
+
+
     @PostMapping("/business/authenticate") 
     public ResponseEntity<Business> authenticate (@RequestBody FormData formData){
         try{
@@ -85,7 +96,22 @@ public class BusinessController {
         catch (Exception e){
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
 
+
+
+    
+    @PutMapping("/business/update")
+    public ResponseEntity<Business> updateMember(@RequestBody Business business) {
+        // logger.info("Update new member");
+
+        try {
+            Business savedBusiness = businessService.updateBusiness(business);
+
+            return new ResponseEntity<>(savedBusiness, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
 ;

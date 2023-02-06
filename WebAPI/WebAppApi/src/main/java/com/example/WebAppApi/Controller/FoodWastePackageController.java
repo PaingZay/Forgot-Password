@@ -47,6 +47,8 @@ public class FoodWastePackageController {
                     @Content(examples = { @ExampleObject(value = "") }) }) })
     
 
+
+
     @GetMapping("/foodwastepackage")
     public ResponseEntity<List<FoodWastePackage>> getAllPackages() {
         try {
@@ -62,6 +64,8 @@ public class FoodWastePackageController {
         }
     }    
 
+
+    
 
     @PostMapping("/foodwastepackage")
     public ResponseEntity<FoodWastePackage> savePackage(@RequestBody RequestCollectionForm requestcollectionform){

@@ -12,4 +12,5 @@ public interface BusinessService {
     List<Business> getUserList ();
     Business getUserbyId (Long id);
     Business getUserbyEmail (String email, String password);
+    Business updateBusiness (Business business);
 }

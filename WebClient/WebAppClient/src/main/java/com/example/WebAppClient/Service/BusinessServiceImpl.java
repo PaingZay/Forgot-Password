@@ -2,6 +2,7 @@ package com.example.WebAppClient.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -37,6 +38,22 @@ public class BusinessServiceImpl implements BusinessService {
     }
 
 
+    //////// Create Business /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    
+    @Override 
+    public Business create (Business business){
+        Mono<Business> createdBusiness = webClient.post()
+                                                  .uri("/business/save")                                       
+                                                  .body(Mono.just(business), Business.class)
+                                                  .retrieve().bodyToMono(Business.class)
+                                                  .timeout(Duration.ofMillis(10_000));
+        return createdBusiness.block();
+    }
+    
+
+
+    //////// Get Business List /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     @Override
@@ -55,6 +72,9 @@ public class BusinessServiceImpl implements BusinessService {
     }
 
 
+    //////// Get Business by ID /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
     @Override
     public Business getUserbyId (Long id) {
         Mono<Business> retrievedMember = webClient.get() 
@@ -71,14 +91,40 @@ public class BusinessServiceImpl implements BusinessService {
     }
 
 
-    @Override 
-    public Business create (Business business){
-        Mono<Business> createdBusiness = webClient.post()
-                                                  .uri("/business/save")                                         //endpoint name of api
-                                                  .body(Mono.just(business), Business.class)
-                                                  .retrieve().bodyToMono(Business.class)
-                                                  .timeout(Duration.ofMillis(10_000));
-        return createdBusiness.block();
+    //////// Update Business /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    @Override
+    public Business updateBusiness (Business business) {
+        Mono<Business> updatedBusiness = webClient.put()
+                .uri("/business/update")
+                .accept(MediaType.APPLICATION_JSON)
+                .body(Mono.just(business), Business.class)
+                .retrieve()
+                .bodyToMono(Business.class);
+        return updatedBusiness.block();
+    }
+
+
+    //////// Delete Business /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    @Override
+    public Boolean deleteBusiness(Long id) {
+        Mono<Boolean> deletedBusiness = webClient.delete()
+                .uri("/business/delete/" + id)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .onStatus(HttpStatus::is4xxClientError, response -> {
+                    return Mono.error(NotFoundException::new);
+                })
+                .onStatus(HttpStatus::is5xxServerError, response -> {
+                    return Mono.error(UnknownError::new);
+                })
+                .bodyToMono(Boolean.class)
+                .onErrorComplete();
+        System.out.println (deletedBusiness);
+        return deletedBusiness.block();
     }
 
 }

@@ -36,52 +36,52 @@ public class WebAppApiApplication {
 	CommandLineRunner commandLineRun(BusinessService businessSerivce, FoodWastePackageService foodwastepackageService, ItemService itemService) {
 	  return args -> {
 
-	// 	  String openingDays = "Mon , Tue, Wed, Thur, Fri, Sat, Sun";
-	// 	  LocalTime openingTime =  LocalTime.of(10,00,00);
-	// 	  LocalTime closingTime =  LocalTime.of(16,00,00);
+	 	  String openingDays = "Mon , Tue, Wed, Thur, Fri, Sat, Sun";
+	 	  LocalTime openingTime =  LocalTime.of(10,00,00);
+	 	  LocalTime closingTime =  LocalTime.of(16,00,00);
 
-	// 	  Business buz1  = new Business("breadtalk.amk@gmail.com","asdf","BreadTalk","Singapore","Bakery","Ang Mo Kio Hub", "123456" , "90844877", openingDays, openingTime, closingTime);
-	// 	  businessSerivce.createBusiness(buz1);
-	// 	  Business buz2  = new Business("koi.amk@gmail.com","asdf1234","Koi","Singapore","Bakery","Ang Mo Kio Hub", "123456" , "90844877", openingDays, openingTime, closingTime);
-	// 	  businessSerivce.createBusiness(buz2);
+	 	  Business buz1  = new Business("breadtalk.amk@gmail.com","asdf","BreadTalk","Singapore","Bakery","Ang Mo Kio Hub", "123456" , "90844877", openingDays, openingTime, closingTime);
+	 	  businessSerivce.createBusiness(buz1);
+	 	  Business buz2  = new Business("koi.amk@gmail.com","asdf1234","Koi","Singapore","Bakery","Ang Mo Kio Hub", "123456" , "90844877", openingDays, openingTime, closingTime);
+	 	  businessSerivce.createBusiness(buz2);
 
-	// 	  LocalTime start =  LocalTime.of(10,00,00);
-	// 	  LocalTime end =  LocalTime.of(16,00,00);
-	// 	  LocalDate pickup = LocalDate.now();
-	// 	  FoodWastePackage c1 = new FoodWastePackage ("Package 1", 1, start, end, pickup, "Breads", "Breads",buz1);
-	// 	  foodwastepackageService.createPackage(c1);
-	// 	  FoodWastePackage c2 = new FoodWastePackage ("Package 2", 1, start, end, pickup, "Cakes", "Mixed", buz2);
-	// 	  foodwastepackageService.createPackage(c2);
+		// 	  LocalTime start =  LocalTime.of(10,00,00);
+		// 	  LocalTime end =  LocalTime.of(16,00,00);
+		// 	  LocalDate pickup = LocalDate.now();
+		// 	  FoodWastePackage c1 = new FoodWastePackage ("Package 1", 1, start, end, pickup, "Breads", "Breads",buz1);
+		// 	  foodwastepackageService.createPackage(c1);
+		// 	  FoodWastePackage c2 = new FoodWastePackage ("Package 2", 1, start, end, pickup, "Cakes", "Mixed", buz2);
+		// 	  foodwastepackageService.createPackage(c2);
 
-	// 	  System.out.println (businessSerivce.getUserbyId(1L));
-
-
-	// 	  Item item1 = new Item ("Cheese Cake", "Cake", 3, "This is cheese cake");
-	// 	  itemService.createItem(item1);
-	// 	  Item item2 = new Item ("Chocolate Cake", "Cake", 3, "This is chocolate cake");
-	// 	  itemService.createItem(item2);
+		// 	  System.out.println (businessSerivce.getUserbyId(1L));
 
 
-	// 	  List<Business> businesses = businessSerivce.getUserList();
-	// 	  if (businesses!=null)
-	// 	  {
-	// 		System.out.println("User list is not empty");
-	// 	  }
+		// 	  Item item1 = new Item ("Cheese Cake", "Cake", 3, "This is cheese cake");
+		// 	  itemService.createItem(item1);
+		// 	  Item item2 = new Item ("Chocolate Cake", "Cake", 3, "This is chocolate cake");
+		// 	  itemService.createItem(item2);
 
-	// 	  List<FoodWastePackage> foodwastepackages = foodwastepackageService.getPackageList();
-	// 	  if (foodwastepackages!=null)
-	// 	  {
-	// 		System.out.println("Collection list is not empty");
-	// 	  }
 
-	// 	  List<Item> items = itemService.getItemList();
-	// 	  if (items!=null)
-	// 	  {
-	// 		System.out.println("Item list is not empty");
-	// 	  }
-		  
-	// 	  System.out.println(buz1);
-	// 	  System.out.println(c1);
+		// 	  List<Business> businesses = businessSerivce.getUserList();
+		// 	  if (businesses!=null)
+		// 	  {
+		// 		System.out.println("User list is not empty");
+		// 	  }
+
+		// 	  List<FoodWastePackage> foodwastepackages = foodwastepackageService.getPackageList();
+		// 	  if (foodwastepackages!=null)
+		// 	  {
+		// 		System.out.println("Collection list is not empty");
+		// 	  }
+
+		// 	  List<Item> items = itemService.getItemList();
+		// 	  if (items!=null)
+		// 	  {
+		// 		System.out.println("Item list is not empty");
+		// 	  }
+			
+		// 	  System.out.println(buz1);
+		// 	  System.out.println(c1);
 	  };
 	}
 }

@@ -18,8 +18,8 @@ public class WebClientConfig {
 
         return webClientBuilder
                 .clientConnector(new ReactorClientHttpConnector(getHttpClient()))
-                // .baseUrl("https://card-service-cloudrun-lmgpq3qg3a-et.a.run.app/card-service")
-                .baseUrl("http://localhost:8081/api")
+                .baseUrl("https://card-service-cloudrun-lmgpq3qg3a-et.a.run.app/card-service/api")
+                // .baseUrl("http://localhost:8081/api")
                 .build();
     }
 

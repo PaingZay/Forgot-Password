@@ -35,4 +35,9 @@ public class BusinessServiceImpl implements BusinessService {
     public Business getUserbyEmail (String email, String password) {
         return businessRepository.getByEmail(email,password);
     }
+
+    @Override
+    public Business updateBusiness (Business business){
+        return businessRepository.saveAndFlush(business);
+    }
 }

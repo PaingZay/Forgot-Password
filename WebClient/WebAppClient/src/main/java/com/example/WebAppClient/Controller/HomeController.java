@@ -1,5 +1,8 @@
 package com.example.WebAppClient.Controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,11 +11,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.example.WebAppClient.DTO.FormData;
 import com.example.WebAppClient.Model.Business;
 import com.example.WebAppClient.Model.FoodWastePackage;
+import com.example.WebAppClient.Model.Item;
+import com.example.WebAppClient.Service.BusinessService;
 import com.example.WebAppClient.Service.HomeService;
 
 
@@ -30,8 +36,14 @@ public class HomeController {
         return "menu";
     }
 
+    @Autowired
+    BusinessService businessService;
 
 
+
+    ////////// Login and Logout ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    
     @GetMapping("/login")
     public String loginPre(@ModelAttribute FormData formData){
         return "login";
@@ -41,10 +53,19 @@ public class HomeController {
     public String loginPost(@ModelAttribute FormData formData, HttpSession session, Model model) {
         Business business = homeService.authenticate(formData);
         if(business!=null) {
-         session.setAttribute("email", business.getEmail()); //set session
+         session.setAttribute("business", business); //set session
          FoodWastePackage foodwastepackage = new FoodWastePackage();
          model.addAttribute("foodwastepackage",foodwastepackage);
-         return "dashboard";
+
+         List<Item> items = new ArrayList<>();
+         Item item1 = new Item ("Cheese Bread","Bread",1, "");
+         Item item2 = new Item ("Chocolate Bread","Bread",1, "");
+         Item item3 = new Item ("Latte","Coffee",3, "");
+         items.add(item1);
+         items.add(item2);
+         items.add(item3);
+         model.addAttribute("items",items);
+         return "redirect:/business/dashboard";
         }
     return "login";
     }
@@ -56,7 +77,23 @@ public class HomeController {
     }
 
 
+    ////////// Registration ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
 
+    @GetMapping("/register")
+    public String registerPage(@ModelAttribute ("business") Business business){
+        return "registration";
+    }
+
+    @PostMapping("/register")
+    public String registerBusiness(@ModelAttribute("business") Business business, @RequestParam("openingDays") String[] openingDays){
+        System.out.println(openingDays);
+        String joinedStrArr = String.join(",", openingDays);
+    	business.setOpeningDays(joinedStrArr);
+        businessService.create(business);
+        
+        return "registerSuccess";
+    }
 
 
 
