@@ -33,13 +33,13 @@ public class FoodWastePackage implements Serializable
     private LocalTime start;
     private LocalTime end;
     
-    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate pickUpDate;
 
     private String status = "Pending";
     private String description;
     private String category;
-    private String[] itemList;
+    private String itemList;
 
     @ManyToOne
     private Business business;

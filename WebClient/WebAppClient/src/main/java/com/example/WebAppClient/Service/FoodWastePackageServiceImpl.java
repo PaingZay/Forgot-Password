@@ -59,4 +59,71 @@ public class FoodWastePackageServiceImpl implements FoodWastePackageService {
         return createdPackage.block();
     }
 
+    @Override
+    public List<FoodWastePackage> getPendingList () {
+        Flux<FoodWastePackage> retrievedPackageList = webClient.get()
+                .uri("/foodwastepackage/pending")
+                .accept(MediaType.APPLICATION_JSON)
+                .exchangeToFlux(response -> {
+                    if (response.statusCode().equals(HttpStatus.OK)) {
+                        return response.bodyToFlux(FoodWastePackage.class);
+                    } else {
+                        return response.createException().flatMapMany(Flux::error);
+                    }
+                });
+        return retrievedPackageList.collectList().block();
+    }
+
+    @Override
+    public List<FoodWastePackage> getHistoryList () {
+        Flux<FoodWastePackage> retrievedPackageList = webClient.get()
+                .uri("/foodwastepackage/history")
+                .accept(MediaType.APPLICATION_JSON)
+                .exchangeToFlux(response -> {
+                    if (response.statusCode().equals(HttpStatus.OK)) {
+                        return response.bodyToFlux(FoodWastePackage.class);
+                    } else {
+                        return response.createException().flatMapMany(Flux::error);
+                    }
+                });
+        return retrievedPackageList.collectList().block();
+    }
+
+
+    @Override
+    public FoodWastePackage getPackagebyId (int id) {
+
+        Mono<FoodWastePackage> retrievedMember = webClient.get() 
+                .uri("/foodwastepackage/retrieve/" + id)
+                .accept(MediaType.APPLICATION_JSON)
+                .exchangeToMono(response -> {
+                    if (response.statusCode().equals(HttpStatus.OK)) {
+                        return response.bodyToMono(FoodWastePackage.class);
+                    } else {
+                        return response.createException().flatMap(Mono::error);
+                    }
+                });
+        return retrievedMember.block(); 
+    }
+
+    @Override
+    public FoodWastePackage updatePackage(int id) {
+        Mono<FoodWastePackage> updatedFoodWastePackage = webClient.put()
+                .uri("/foodwastepackage/collected")
+                .body(Mono.just(id), Integer.class)
+                .retrieve()
+                .bodyToMono(FoodWastePackage.class);
+        return updatedFoodWastePackage.block();
+    }
+
+    @Override
+    public FoodWastePackage updateCancelled(int id) {
+        Mono<FoodWastePackage> updatedFoodWastePackage = webClient.put()
+                .uri("/foodwastepackage/cancelled")
+                .body(Mono.just(id), Integer.class)
+                .retrieve()
+                .bodyToMono(FoodWastePackage.class);
+        return updatedFoodWastePackage.block();
+    }
+
 }

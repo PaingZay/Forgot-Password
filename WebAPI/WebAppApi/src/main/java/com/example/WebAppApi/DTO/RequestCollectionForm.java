@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,12 +28,14 @@ public class RequestCollectionForm
     private int quantity = 1;
     private LocalTime start;
     private LocalTime end;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate pickUpDate;
 
     private String status = "Pending";
     private String description;
     private String category;
-    private String[] itemList;
+    private String itemList;
     private long businessId;
 
 

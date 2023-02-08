@@ -1,8 +1,5 @@
 package com.example.WebAppClient.Controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +14,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 import com.example.WebAppClient.DTO.FormData;
 import com.example.WebAppClient.Model.Business;
 import com.example.WebAppClient.Model.FoodWastePackage;
-import com.example.WebAppClient.Model.Item;
 import com.example.WebAppClient.Service.BusinessService;
 import com.example.WebAppClient.Service.HomeService;
 
@@ -57,14 +53,6 @@ public class HomeController {
          FoodWastePackage foodwastepackage = new FoodWastePackage();
          model.addAttribute("foodwastepackage",foodwastepackage);
 
-         List<Item> items = new ArrayList<>();
-         Item item1 = new Item ("Cheese Bread","Bread",1, "");
-         Item item2 = new Item ("Chocolate Bread","Bread",1, "");
-         Item item3 = new Item ("Latte","Coffee",3, "");
-         items.add(item1);
-         items.add(item2);
-         items.add(item3);
-         model.addAttribute("items",items);
          return "redirect:/business/dashboard";
         }
     return "login";
@@ -88,7 +76,7 @@ public class HomeController {
     @PostMapping("/register")
     public String registerBusiness(@ModelAttribute("business") Business business, @RequestParam("openingDays") String[] openingDays){
         System.out.println(openingDays);
-        String joinedStrArr = String.join(",", openingDays);
+        String joinedStrArr = String.join(", ", openingDays);
     	business.setOpeningDays(joinedStrArr);
         businessService.create(business);
         

@@ -26,16 +26,19 @@ public class RequestCollectionForm
 
     private String packageName;
     private int quantity = 1;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime start;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime end;
     
-    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate pickUpDate;
 
     private String status = "Pending";
     private String description;
     private String category;
-    private String[] itemList;
+    private String itemList;
     private Long businessId;
 
 

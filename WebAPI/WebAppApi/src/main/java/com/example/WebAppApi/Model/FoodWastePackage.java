@@ -27,16 +27,18 @@ public class FoodWastePackage implements Serializable
 	private int id;
     
     private String packageName;
-    private int quantity;
     private LocalTime start;
     private LocalTime end;
+    private int quantity;
+    private String category;
     private LocalDate pickUpDate;
     private String description;
-    private String category;
-    private String[] itemList;
+    private String itemList;
+    private String status = "Pending";
 
     @ManyToOne
     private Business business;
+
 
 
     // public FoodWastePackage (String packageName, int quantity, LocalTime start, LocalTime end, LocalDate pickUpDate, String description, String category)

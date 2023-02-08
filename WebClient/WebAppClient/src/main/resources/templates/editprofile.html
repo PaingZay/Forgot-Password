@@ -58,7 +58,7 @@
         
                                         <div class="row">
                                             <div class="col-sm-3"> <p class="mb-0">Email</p> </div>
-                                            <div class="col-sm-8"><input type="text" th:field="*{email}"></td></div>
+                                            <div class="col-sm-8"><input type="text" class ="form-control" th:field="*{email}" readonly = "readonly"></td></div>
                                         </div>
                                         <hr>
         
@@ -83,7 +83,7 @@
                                         <div class="row">
                                             <div class="col-sm-3"> <p class="mb-0">Opening Days</p> </div>
                                             <div class="col-sm-8">
-                                                <div class = "mx-auto" style="text-align:center;">
+                                                
                                                     <label style="margin-right:5px"> Mon <input type="checkbox" name="openingDays" id="monday" value="Monday" /> </label>
                                                                   <label style="margin-right:5px"> Tue <input type="checkbox" name="openingDays" value="Tuesday" /> </label>
                                                                   <label style="margin-right:5px"> Wed <input type="checkbox" name="openingDays" value="Wednesday" /> </label>
@@ -91,7 +91,7 @@
                                                                   <label style="margin-right:5px"> Fri <input type="checkbox" name="openingDays" value="Friday" /> </label>
                                                                   <label style="margin-right:5px"> Sat <input type="checkbox" name="openingDays" value="Saturday" /> </label>
                                                                   <label style="margin-right:5px"> Sun <input type="checkbox" name="openingDays" value="Sunday" /> </label> 
-                                                </div>
+                                               
                                               </div>
                                         </div>
                                         <hr>

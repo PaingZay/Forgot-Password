@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Profile Page</title>
+<title>Registration Page</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" rel="stylesheet" >
@@ -17,11 +17,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="http://localhost:8083/business/dashboard">Dashboard </a>
-              </li>
               <li class="nav-item active">
-                <a class="nav-link" href="http://localhost:8083/business/profile">Profile <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="http://localhost:8083/business/dashboard">Dashboard <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="http://localhost:8083/business/profile">Profile</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Calender</a>
@@ -41,66 +41,66 @@
 
         <div class="container">
 
-                <form method="get" th:object="${business}">
+                <form method="get" th:object="${details}">
                     <div class="row align-items-center"style="min-height: 80vh; width:100rem">    
                         <div class="row align-items-top"style="min-height: 50vh; width:100rem">
                             <div class="col-lg-7">
         
-                                <h6 class="card-title" >Business Information</h6>
+                                <h6 class="card-title" >Collection Details</h6>
                                 <div class="card mb-4">
                                     <div class="card-body">
-                                        
+
+        
                                         <div class="row">
-                                            <div class="col-sm-3"> <p class="mb-0">Business Name</p> </div>
-                                            <div class="col-sm-8"><td class="align-middle" th:text="${business.businessName}"></td></div>
+                                            <div class="col-sm-3"> <p class="mb-0">Package Name</p> </div>
+                                            <div class="col-sm-8"> <td class="align-middle" th:text="${details.packageName}"></td> </div>
                                         </div>
                                         <hr>
         
                                         <div class="row">
-                                            <div class="col-sm-3"> <p class="mb-0">Email</p> </div>
-                                            <div class="col-sm-8"> <td class="align-middle" th:text="${business.email}"></td> </div>
+                                            <div class="col-sm-3"> <p class="mb-0">Quantity</p> </div>
+                                            <div class="col-sm-8"> <td class="align-middle" th:text="${details.quantity}"> </td></div>
                                         </div>
                                         <hr>
         
                                         <div class="row">
-                                            <div class="col-sm-3"> <p class="mb-0">Contact Number</p> </div>
-                                            <div class="col-sm-8"> <td class="align-middle" th:text="${business.contactNumber}"> </td></div>
+                                            <div class="col-sm-3"> <p class="mb-0">Pickup Time</p> </div>
+                                            <div class="col-sm-8"> <td class="align-middle" th:text="${details.start}"></td>
+                                                                    <td class="align-midlle">-</td>
+                                                                    <td class="align-middle" th:text="${details.end}"></td> </div>
                                         </div>
                                         <hr>
         
                                         <div class="row">
-                                            <div class="col-sm-3"> <p class="mb-0">Address</p> </div>
-                                            <div class="col-sm-8"> <td class="align-middle" th:text="${business.address}"></td> </div>
+                                            <div class="col-sm-3"> <p class="mb-0">Pickup Date</p> </div>
+                                            <div class="col-sm-8"> <td class="align-middle" th:text="${details.pickUpDate}"></td> </div>
+                                        </div>
+                                        <hr>
+
+                                        <div class="row">
+                                            <div class="col-sm-3"> <p class="mb-0">Status</p> </div>
+                                            <div class="col-sm-8"> <td class="align-middle" th:text="${details.status}"></td> </div>
+                                        </div>
+                                        <hr>
+
+                                        <div class="row">
+                                            <div class="col-sm-3"> <p class="mb-0">Description</p> </div>
+                                            <div class="col-sm-8"> <td class="align-middle" th:text="${details.description}"></td> </div>
                                         </div>
                                         <hr>
         
                                         <div class="row">
-                                            <div class="col-sm-3"> <p class="mb-0">Postal Code</p> </div>
-                                            <div class="col-sm-8"> <td class="align-middle" th:text="${business.postalCode}"></td> </div>
+                                            <div class="col-sm-3"> <p class="mb-0">Category</p> </div>
+                                            <div class="col-sm-8"> <td class="align-middle" th:text="${details.category}"></td> </div>
                                         </div>
                                         <hr>
-        
+
                                         <div class="row">
-                                            <div class="col-sm-3"> <p class="mb-0">Opening Days</p> </div>
-                                            <div class="col-sm-8"> <td class="align-middle" th:text="${business.openingDays}"></td> </div>
-                                        </div>
-                                        <hr>
-        
-                                        <div class="row">
-                                            <div class="col-sm-3"> <p class="mb-0">Opening Hours</p> </div>
-                                            <div class="col-sm-8">
-                                                <td class="align-middle" th:text="${business.openingTime}"></td>
-                                                <td class="align-midlle">-</td>
-                                                <td class="align-middle" th:text="${business.closingTime}"></td>
-                                            </div>
+                                            <div class="col-sm-3"> <p class="mb-0">Item List</p> </div>
+                                            <div class="col-sm-8"> <td class="align-middle" th:text="${details.itemList}"></td> </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div> 
-                            <div class="col-lg-4">
-                                <td>
-                                    <a th:href="@{/business/update}" class="btn btn-secondary">Update Profile</a>
-                                </td> 
                             </div>
                         </div>
                     </div>  
