@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,8 +60,6 @@ public class BusinessController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }    
-    
-
 
 
     @GetMapping("/business/{id}")
@@ -85,16 +84,14 @@ public class BusinessController {
 
 
 
-
     @PostMapping("/business/authenticate") 
-    public ResponseEntity<Business> authenticate (@RequestBody FormData formData){
+    public ResponseEntity<Business> authenticate (@RequestBody FormData formData, Model model){
         try{
             Business authenticatedBusiness = businessService.getUserbyEmail(formData.getEmail(),formData.getPassword());  
-            System.out.print(authenticatedBusiness);
             return new ResponseEntity<>(authenticatedBusiness, HttpStatus.OK);     
         }
         catch (Exception e){
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);            
         }
     }
 
@@ -113,5 +110,26 @@ public class BusinessController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/business/getBusinessbyEmail/{email}")
+    public ResponseEntity<Business> getBusinessbyEmail(@PathVariable("email") String email){
+        return new ResponseEntity<Business>(businessService.getBusinessbyEmail(email), HttpStatus.OK);
+    }
+
+    
+    @PutMapping("/business/forgotpassword")
+    public ResponseEntity<Business> updatePassword(@RequestBody FormData formdata) {
+        // logger.info("Update new member");
+
+        try {
+            Business savedBusiness = businessService.updatePassword(formdata.getEmail(), formdata.getPassword());
+
+            return new ResponseEntity<>(savedBusiness, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    
 }
 ;

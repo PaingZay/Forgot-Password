@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Registration</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" rel="stylesheet" >
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <div class="bg-image" style=" background-image: url(../images/2.jpg); 
+  background-position: right; 
+  background-size:40%; 
+  background-repeat:no-repeat;">
+  
+  <nav class="navbar navbar-expand-lg navbar-light" style="height:10%; padding-bottom:0%;" >
+    <a class="navbar-brand" href="http://localhost:8083/menu">
+      <img src="/images/logo.png" width="80" height="25" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-  icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active" style="padding-right:2rem; padding-left:2rem; font-size:15px;">
+            <a class="nav-link" href="#">About Us</a>
+          </li>
+          
+          <li class="nav-item active" style="font-size:15px;">
+            <a class="nav-link" href="#">Contact Us</a>
+          </li>
+        </ul>
+        <span class="nav-item">
+            <a class="btn btn-outline-dark btn-sm" href="http://localhost:8083/login">Sign In</a>
+        </span>
+    </nav> 
+
+    <div class="container">
+        <div class="row align-items-center" style="min-height:80vh;">
+
+        <div class="col-md-12">
+            <center>
+            <div class = "card" style="width:35rem; backdrop-filter: blur(20px); background-color: rgba(255, 255, 255, 0.2);"> 
+            </br>   
+                <h6 class="card-title font-weight-bold" style="color:mediumseagreen;" >BUSINESS INFORMATION</h6>
+                <div class="card-body">
+                  <form method="post" action="#" th:action="@{/register}" th:object="${business}">
+
+                    <center>
+                        <form class="form-group" style="width:30rem;" >
+        
+                            <div class="row justify-content-between text-left" style="height:3.5rem;">
+                                <div class="form-group col-sm-6 flex-column d-flex"> 
+                                  <input type="text" id="businessNameInput" th:field="*{businessName}" placeholder="Business Name"> 
+                                  <span style="font-size:10px; color:red;" th:if="${#fields.hasErrors('businessName')}" th:errors="*{businessName}"></span>
+                                </div>
+                                
+                                <div class="form-group col-sm-6 flex-column d-flex"> 
+                                  <input type="text" id="branchInput" th:field="*{branch}" placeholder="Branch">
+                                  <span style="font-size:10px; color:red;" th:if="${#fields.hasErrors('branch')}" th:errors="*{branch}"></span> 
+                                </div>
+                            </div>
+        
+                            <div class="row justify-content-between text-left" style="height:3.5rem;">
+                                <div class = "mx-auto">
+                                      <select class="selectpicker" id="businessTypeInput" style="width:15.2rem; height:1.9rem" th:field="*{businessType}"> 
+                                        <option th:value="Other">Select Business Type</option>                                                                    
+                                        <option th:value="Restaurant" th:text="Restaurant"></option>
+                                        <option th:value="Bakery" th:text="Bakery"></option>
+                                        <option th:value="Bar" th:text="Bar"></option>
+                                        <option th:value="Cafe" th:text="Cafe"></option>
+                                        <option th:value="Supermarket" th:text="Supermarket"></option>
+                                        <option th:value="Other" th:text="Other"></option>
+                                      </select>
+                                </div>  
+                                
+                                <div class="form-group col-sm-6 flex-column d-flex"> 
+                                  <input type="text" id="contactNumberInput" th:field="*{contactNumber}" placeholder="Contact Number"> 
+                                  <span style="font-size:10px; color:red;" th:if="${#fields.hasErrors('contactNumber')}" th:errors="*{contactNumber}"></span>
+                                </div>
+                                
+                            </div>
+        
+        
+                            <div class="row justify-content-between text-left" style="height:3.5rem;">
+                              <div class="form-group col-sm-6 flex-column d-flex"> 
+                                <input type="text" id="addressInput" th:field="*{address}" placeholder="Address"> 
+                                <span style="font-size:10px; color:red;" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
+                              </div>
+                              <div class="form-group col-sm-6 flex-column d-flex"> 
+                                <input type="text" id="postalCodeInput" th:field="*{postalCode}" placeholder="Postal Code"> 
+                                <span style="font-size:10px; color:red;" th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}"></span>
+                              </div>
+                            </div>
+        
+        
+                            <div class="row justify-content-between text-left" style="height:3.5rem;">
+                              <div class="form-group col-sm-6 flex-column d-flex"> 
+                                <input type="text" id="emailInput" th:field="*{email}" placeholder="Email Address"> 
+                                <span style="font-size:10px; color:red;" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                              </div>
+                              <div class="form-group col-sm-6 flex-column d-flex"> 
+                                <input type="password" id="passwordInput" th:field="*{password}" placeholder="Password"> 
+                                <span style="font-size:10px; color:red;" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                              </div>
+                            </div>
+        
+                          </br>
+                            <h6 class="card-title font-weight-bold" style="color:mediumseagreen;;">Opening Days & Hours</h6>
+                          </br>
+                            <div class="row justify-content-center text-left">
+                              <div class = "mx-auto" style="text-align:center;">
+                                  <label style="margin-right:5px"> Mon <input type="checkbox" id="openingDaysInput" name="openingDays" value="monday" checked/> </label>
+							                    <label style="margin-right:5px"> Tue <input type="checkbox" id="openingDaysInput" name="openingDays" checked/> </label>
+							                    <label style="margin-right:5px"> Wed <input type="checkbox" id="openingDaysInput" name="openingDays" checked/> </label>
+							                    <label style="margin-right:5px"> Thur <input type="checkbox"  id="openingDaysInput" name="openingDays" value="thursday" checked/> </label>
+							                    <label style="margin-right:5px"> Fri <input type="checkbox"  id="openingDaysInput" name="openingDays" value="friday" checked/> </label>
+							                    <label style="margin-right:5px"> Sat <input type="checkbox"  id="openingDaysInput" name="openingDays" value="saturday" /> </label>
+							                    <label style="margin-right:5px"> Sun <input type="checkbox"  id="openingDaysInput" name="openingDays" value="sunday" /> </label> 
+                              </div>
+                            </div>
+
+
+                            <div class="row justify-content-center text-left">    
+                              <div class="form-group col-sm-6 flex-column d-flex" style="margin-top: 12px; font-size:12px;">From
+                                <input class="form-control" type="time" id="openingTimeInput" th:field="*{openingTime}"/>
+                                <span style="font-size:10px; color:red;" th:if="${#fields.hasErrors('openingTime')}" th:errors="*{openingTime}"></span>
+                              </div> 
+                              <div class="form-group col-sm-6 flex-column d-flex" style="margin-top: 12px; font-size:12px;">To
+                                <input class="form-control" type="time" id="closingTimeInput" th:field="*{closingTime}"/>
+                                <span style="font-size:10px; color:red;" th:if="${#fields.hasErrors('closingTime')}" th:errors="*{closingTime}"></span>
+                              </div>                                                  
+                            </div>
+    
+        
+                            <!-- <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="fri" value="fri" />
+                                <label class="form-check-label" for="fri">I accept FoodShare's Privacy Policy</label>
+                            </div> -->
+                          
+                            <td>&nbsp;</td>
+                            <td>
+                              <input class="btn btn-info btn-sm" type="submit" value="Sign Up" onclick="setToLocalStorage();displayMessage();">
+                            </td>
+                        </div>
+
+                    </form></center>
+                </div>               
+                </div></center>
+                
+                
+          </div>
+        </div>  
+      </div>  
+    </div>
+  
+    <script>
+        function displayMessage() {
+                var email = document.getElementById("email").value;
+                var message = "Your OTP has been sent to " + email;
+                alert(message); //Just for printing out 
+              }
+
+        function setToLocalStorage() {
+          var email = document.getElementById("emailInput").value;
+          var businessName = document.getElementById("businessNameInput").value;
+          var branch = document.getElementById("branchInput").value;
+          var businessType = document.getElementById("businessTypeInput").value;
+          var contactNumber = document.getElementById("contactNumberInput").value;
+          var address = document.getElementById("addressInput").value;
+          var postalCode = document.getElementById("postalCodeInput").value;
+          var password = document.getElementById("passwordInput").value;
+          var openingTime = document.getElementById("openingTimeInput").value;
+          var closingTime = document.getElementById("closingTimeInput").value;
+
+        
+          localStorage.setItem("email", email);
+          localStorage.setItem("businessName", businessName);
+          localStorage.setItem("branch", branch);
+          localStorage.setItem("businessType", businessType);
+          localStorage.setItem("contactNumber", contactNumber);
+          localStorage.setItem("address", address);
+          localStorage.setItem("postalCode", postalCode);
+          localStorage.setItem("password", password);               
+          localStorage.setItem("openingTime", openingTime);
+          localStorage.setItem("closingTime", closingTime);
+
+
+          //////////////////////////////////////////////Gather Checkbox Value as Array/////////////////////////////////////////
+          var selected = new Array();
+          //Reference all the CheckBoxes in Table.
+          var chks = document.getElementsByName("openingDays");
+          // Loop and push the checked CheckBox value in Array.
+          for (var i = 0; i < chks.length; i++) {
+              if (chks[i].checked) {
+                  selected.push(chks[i].value);
+              }
+          }
+          //Print array
+          // if (selected.length > 0) {
+          //     alert("Selected values: " + selected.join(","));
+          // }
+          // localStorage.setItem("openingDays", selected);
+          localStorage.setItem("openingDays", selected.toString());//Convert to String and send
+        }
+    </script>
+    
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#example-getting-started').multiselect();
+    });
+</script>
+</body>
+
+
+</html>

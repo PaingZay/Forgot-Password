@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +22,7 @@ public class Item implements Serializable
 
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 
     private String name;
 
@@ -29,13 +30,19 @@ public class Item implements Serializable
 
     private int period;
 
-    private String description;
+    private Float weight;
 
-    public Item (String name, String category, int period, String description){
+    private String manufacturer;
+
+    @ManyToOne
+    private Business business;
+
+    public Item (String name, String category, Integer period, Business business, String manufacturer, Float weight){
         this.name = name;
         this.category = category;
         this.period = period;
-        this.description = description;
+        this.business = business;
+        this.manufacturer = manufacturer;
+        this.weight = weight;
     }
-    
 }

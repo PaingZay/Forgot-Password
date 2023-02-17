@@ -14,4 +14,10 @@ public interface BusinessRepository extends JpaRepository<Business, Long> {
     @Query("SELECT b FROM Business b where b.email = :email AND b.password=:password")
     Business getByEmail (@Param("email") String email, @Param("password") String password);
     
+    @Query("SELECT b FROM Business b where b.email = :email")
+    Business getBusinessbyEmail (@Param("email") String email);
+    
+    @Query("UPDATE Business b SET b.password = :password where b.email = :email")
+    //update User u set u.active
+    Business updatePasswordByEmail (@Param("email") String email, @Param("password") String password);
 }

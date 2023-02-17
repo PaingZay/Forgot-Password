@@ -10,9 +10,11 @@ public interface FoodWastePackageService {
 
     FoodWastePackage createPackage (FoodWastePackage foodwastepackage);
     List<FoodWastePackage> getPackageList ();
-    List<FoodWastePackage> getPendingList ();
-    List<FoodWastePackage> getHistoryList ();
-    FoodWastePackage updatePackage(int id);
-    FoodWastePackage updateCancelled(int id);
-    FoodWastePackage getPackageById(int id);
+    List<FoodWastePackage> getPendingList (Long id);
+    List<FoodWastePackage> getHistoryList (Long id);
+    FoodWastePackage updatePackage(Long id);
+    FoodWastePackage updateCancelled(Long id);
+    FoodWastePackage getPackageById(Long id);
+    Boolean removeHistoryById(Long memberId);
+    Boolean removeAllHistoryById(Long id);
 }

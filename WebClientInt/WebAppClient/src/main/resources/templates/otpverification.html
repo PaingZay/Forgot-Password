@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset = "ISO-8859-1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    
+  <div class="bg-image" style=" background-image: url(../images/3.jpg); 
+                                background-position: right; 
+                                background-size:40%; 
+                                background-repeat:no-repeat;">
+                                
+                                <nav class="navbar navbar-expand-lg navbar-light" style="height:10%; padding-bottom:0%;" >
+                                  <a class="navbar-brand" href="http://localhost:8083/menu">
+                                    <img src="/images/logo.png" width="80" height="25" alt="">
+                                  </a>
+                                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                  </button>
+                                  <div class="collapse navbar-collapse" id="navbarText">
+                                      <ul class="navbar-nav mr-auto">
+                                        <li class="nav-item active" style="padding-right:2rem; padding-left:2rem; font-size:15px;">
+                                          <a class="nav-link" href="#">About Us</a>
+                                        </li>
+                                        
+                                        <li class="nav-item active" style="font-size:15px;">
+                                          <a class="nav-link" href="#">Contact Us</a>
+                                        </li>
+                                      </ul>
+                                      <span class="nav-item">
+                                          <a class="btn btn-outline-dark btn-sm" href="http://localhost:8083/login">Sign In</a>
+                                      </span>
+                                  </nav> 
+
+
+    <div class="container">
+        <div
+          class="row align-items-center"
+          style="min-height: 90vh">
+          <div class="col-md-12">
+            <center>
+              <div class = "card" style="width:25rem; backdrop-filter: blur(15px); background-color: rgba(255, 255, 255, 0.2);">
+              
+              <form method="post" th:action="@{'/otp'}">
+
+              <table>
+                <fieldset class="form-group p-3">
+
+                  <tr>
+                    <div class="form-group text-center">
+                      <input type="text" name="otpInput" style="text-align:center;" placeholder="Enter OTP">
+                      <input type="text" name="emailInput" id="emailInput" th:field="${business.email}" hidden>
+                      <input type="text" name="businessNameInput" id="businessNameInput" th:field="${business.businessName}" hidden>
+                      <input type="text" name="passwordInput" id="passwordInput" th:field="${business.password}" hidden>
+                      <input type="text" name="branchInput" id="branchInput" th:field="${business.branch}" hidden>
+                      <input type="text" name="businessTypeInput" id="businessTypeInput" th:field="${business.businessType}" hidden>
+                      <input type="text" name="addressInput" id="addressInput" th:field="${business.address}" hidden>
+                      <input type="text" name="postalCodeInput" id="postalCodeInput" th:field="${business.postalCode}" hidden>
+                      <input type="text" name="contactNumberInput" id="contactNumberInput" th:field="${business.contactNumber}" hidden>
+                      <input type="text" name="openingDaysInput" id="openingDaysInput" th:field="${business.openingDays}" hidden>
+                      <input type="text" name="openingTimeInput" id="openingTimeInput" th:field="${business.openingTime}" hidden>
+                      <input type="text" name="closingTimeInput" id="closingTimeInput" th:field="${business.closingTime}" hidden>
+                    </div>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                    <td>
+                      <input class="btn btn-primary btn-sm" type="submit" value="Verify & Proceed">
+                    </td>
+                  </tr>
+                  </fieldset>
+              </table>
+              </form>
+              
+              <form method="post" th:action="@{'/resendotp'}">
+                    <fieldset class="form-group p-3">
+                        <div class="row justify-content-center">
+                          <input type="text" name="resendEmailInput" id="resendEmailInput" hidden>
+                          <input class="btn btn-info btn-sm" style="font-size:12px;" type="submit" onclick="setTimeout(myFunction, 30000); d();" id="myBtn" value="Resend OTP">
+                        </div>  
+
+                        <div class="row justify-content-center" style="height:1rem; padding-top:15px;">
+                          <span id="message" style="display:none; font-size:12px; color:red;" > Send OTP again after 30 seconds</span> 
+                        </div>                
+                    </fieldset>
+              </form>
+
+            </center>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+        function myFunction() {
+        //   alert('Hello');
+          document.getElementById("message").style.display = "none";
+          document.getElementById("myBtn").disabled = false;
+        }
+        function d()
+        {
+            document.getElementById("message").style.display = "block";
+            document.getElementById("myBtn").disabled = true;
+        }
+
+        window.onload = function() {
+
+        var email = localStorage.getItem("email");
+        var emailInput = document.getElementById('emailInput');
+        emailInput.value = email;
+        // window.alert(email);
+
+        var resendEmailInput = document.getElementById('resendEmailInput');
+        resendEmailInput.value = email;
+        // window.alert(email);
+
+        var businessName = localStorage.getItem("businessName");
+        var businessNameInput = document.getElementById('businessNameInput');
+        businessNameInput.value = businessName;
+        // alert(businessName);
+
+        var branch = localStorage.getItem("branch");
+        var branchInput = document.getElementById('branchInput');
+        branchInput.value = branch;
+        // alert(branch);
+
+        var businessType = localStorage.getItem("businessType");
+        var businessTypeInput = document.getElementById('businessTypeInput');
+        businessTypeInput.value = businessName;
+        // alert(businessType);
+
+        var contactNumber= localStorage.getItem("contactNumber");
+        var contactNumberInput = document.getElementById('contactNumberInput');
+        contactNumberInput.value = contactNumber;
+        // alert(contactNumber);
+
+        var address= localStorage.getItem("address");
+        var addressInput = document.getElementById('addressInput');
+        addressInput.value = address;
+        // alert(address);
+        
+        var postalCode= localStorage.getItem("postalCode");
+        var postalInput = document.getElementById('postalCodeInput');
+        postalCodeInput.value = postalCode;
+        // alert(postalCode);
+
+        var password= localStorage.getItem("password");
+        var passwordInput = document.getElementById('passwordInput');
+        passwordInput.value = password;
+        // alert(password);
+
+        var openingDays = localStorage.getItem("openingDays");
+        var openingDaysInput = document.getElementById('openingDaysInput');
+        openingDaysInput.value = openingDays;
+        // alert(openingDays);
+
+        var openingTime = localStorage.getItem("openingTime");
+        var openingTimeInput = document.getElementById('openingTimeInput');
+        openingTimeInput.value = openingTime;
+        // alert(openingTime);
+        
+        var closingTime = localStorage.getItem("closingTime");
+        var closingTimeInput = document.getElementById('closingTimeInput');
+        closingTimeInput.value = closingTime;
+        // alert(closingTime);
+        }
+    </script>
+
+</body>
+
+
+</html>

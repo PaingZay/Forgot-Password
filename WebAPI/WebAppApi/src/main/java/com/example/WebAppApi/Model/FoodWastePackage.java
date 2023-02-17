@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,13 +26,14 @@ public class FoodWastePackage implements Serializable
 
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
     
     private String packageName;
-    private LocalTime start;
-    private LocalTime end;
-    private int quantity;
-    private String category;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    private LocalTime startTime;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    private LocalTime endTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate pickUpDate;
     private String description;
     private String itemList;
@@ -52,15 +55,13 @@ public class FoodWastePackage implements Serializable
     //     this.category = category;
     // }
 
-    public FoodWastePackage (String packageName, int quantity, LocalTime start, LocalTime end, LocalDate pickUpDate, String description, String category, Business business)
+    public FoodWastePackage (String packageName, LocalTime start, LocalTime end, LocalDate pickUpDate, String description, Business business)
     {
         this.packageName = packageName;
-        this.quantity = quantity;
-        this.start = start;
-        this.end = end;
+        this.startTime = start;
+        this.endTime = end;
         this.pickUpDate = pickUpDate;
         this.description = description;
-        this.category = category;
         this.business = business;
     }
 

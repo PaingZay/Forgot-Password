@@ -6,26 +6,23 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.WebAppApi.DTO.RequestCollectionForm;
-import com.example.WebAppApi.Model.Business;
 import com.example.WebAppApi.Model.FoodWastePackage;
 import com.example.WebAppApi.Service.BusinessService;
 import com.example.WebAppApi.Service.FoodWastePackageService;
 
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-
-
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 
 @RestController
@@ -69,22 +66,11 @@ public class FoodWastePackageController {
 
     
 
-    @PostMapping("/foodwastepackage")
-    public ResponseEntity<FoodWastePackage> savePackage(@RequestBody RequestCollectionForm requestcollectionform){
+    @PostMapping("/foodwastepackage/save")
+    public ResponseEntity<FoodWastePackage> savePackage(@RequestBody FoodWastePackage foodWastePackage){
         try{
-            FoodWastePackage newPackage = new FoodWastePackage();
-            newPackage.setPackageName(requestcollectionform.getPackageName());
-            newPackage.setQuantity(requestcollectionform.getQuantity());
-            newPackage.setStart(requestcollectionform.getStart());
-            newPackage.setEnd(requestcollectionform.getEnd());
-            newPackage.setPickUpDate(requestcollectionform.getPickUpDate());
-            newPackage.setDescription(requestcollectionform.getDescription());
-            newPackage.setCategory(requestcollectionform.getCategory());
-            newPackage.setItemList(requestcollectionform.getItemList());
-            Business business = businessService.getUserbyId(requestcollectionform.getBusinessId());
-            newPackage.setBusiness(business);
 
-            FoodWastePackage savedPackage= foodwastepackageService.createPackage(newPackage);
+            FoodWastePackage savedPackage= foodwastepackageService.createPackage(foodWastePackage);
             return new ResponseEntity<>(savedPackage, HttpStatus.CREATED);
         }
         catch (Exception e){
@@ -94,11 +80,11 @@ public class FoodWastePackageController {
 
 
 
-    @GetMapping("/foodwastepackage/pending")
-    public ResponseEntity<List<FoodWastePackage>> getPendingList() {
+    @GetMapping("/foodwastepackage/get-list-pending/{id}")
+    public ResponseEntity<List<FoodWastePackage>> getPendingList(@PathVariable("id") Long id) {
         try {
             List<FoodWastePackage> packages = new ArrayList<FoodWastePackage>();
-            packages = foodwastepackageService.getPendingList();
+            packages = foodwastepackageService.getPendingList(id);
 
             if (packages.isEmpty()) {
                 List<FoodWastePackage> emptypackage = new ArrayList<FoodWastePackage>();
@@ -111,11 +97,12 @@ public class FoodWastePackageController {
     }
 
 
-    @GetMapping("/foodwastepackage/history")
-    public ResponseEntity<List<FoodWastePackage>> getHistory() {
+
+    @GetMapping("/foodwastepackage/get-list-history/{id}")
+    public ResponseEntity<List<FoodWastePackage>> getHistory(@PathVariable("id") Long id) {
         try {
             List<FoodWastePackage> packages = new ArrayList<FoodWastePackage>();
-            packages = foodwastepackageService.getHistoryList();
+            packages = foodwastepackageService.getHistoryList(id);
 
             if (packages.isEmpty()) {
                 List<FoodWastePackage> emptypackage = new ArrayList<FoodWastePackage>();
@@ -128,8 +115,9 @@ public class FoodWastePackageController {
     }
 
 
-    @PutMapping("/foodwastepackage/collected")
-    public ResponseEntity<FoodWastePackage> updateMember(@RequestBody int id) {
+
+    @PutMapping("/foodwastepackage/update/collected/{id}")
+    public ResponseEntity<FoodWastePackage> updateMember(@RequestBody Long id) {
 
         try {
             
@@ -144,8 +132,9 @@ public class FoodWastePackageController {
         }
     }
 
-    @PutMapping("/foodwastepackage/cancelled")
-    public ResponseEntity<FoodWastePackage> updateCancelledStatus(@RequestBody int id) {
+
+    @PutMapping("/foodwastepackage/update/cancelled/{id}")
+    public ResponseEntity<FoodWastePackage> updateCancelledStatus(@RequestBody Long id) {
 
         try {
             
@@ -160,13 +149,47 @@ public class FoodWastePackageController {
         }
     }
 
+
+    
     @GetMapping("/foodwastepackage/retrieve/{id}")
-    public ResponseEntity<FoodWastePackage> getPackageById(@PathVariable("id") int id){
+    public ResponseEntity<FoodWastePackage> getPackageById(@PathVariable("id") Long id){
 
         
         FoodWastePackage fwp = foodwastepackageService.getPackageById(id);
         System.out.print("This is object from API"+fwp.toString());
         return new ResponseEntity<FoodWastePackage>(foodwastepackageService.getPackageById(id), HttpStatus.OK);
+    }
+
+    /////////////////////////////////////////////Remove History by Using Id//////////////////////////////////////
+
+    @DeleteMapping("/foodwastepackage/history/remove/{id}")
+    public ResponseEntity<Long> removeHistory(@PathVariable("id") Long id) {
+        try {
+            var isRemoved = foodwastepackageService.removeHistoryById(id);
+
+            if (!isRemoved) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+
+            return new ResponseEntity<>(id, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/foodwastepackage/history/remove-all/{id}")
+    public ResponseEntity<Long> removeAllHistory(@PathVariable Long id ) {
+        try {
+            var isRemoved = foodwastepackageService.removeAllHistoryById(id);
+
+            if (!isRemoved) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
 ;

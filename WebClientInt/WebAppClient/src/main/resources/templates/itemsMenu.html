@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Items Menu</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" rel="stylesheet" >
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+<script
+src="http://code.jquery.com/jquery-3.3.1.min.js"
+integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" ></script>
+</head>
+
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light" style="height:10%;" >
+    <a class="navbar-brand">
+      <img src="/images/logo.png" width="80" height="25" alt="">
+    </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-  icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item ">
+                <a class="nav-link" href="http://localhost:8083/business/dashboard">Dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="http://localhost:8083/business/profile">Profile</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="http://localhost:8083/business/itemlist">Menu</a><span class="sr-only">(current)</span></a>
+              </li>
+              <li class="notificaton">
+                <a class="nav-link" href="#">Notification</a>
+              </li>
+            </ul>
+            <span class="nav-item">
+                <a class="nav-link" href="http://localhost:8083/logout">Sign Out </a>
+            </span>
+        </nav> 
+
+
+
+
+        <div class="container" style="padding-top: 1rem;">
+            <div class="row align-items-center" style="min-height: 50vh">
+                
+                                    
+            
+                                        <table class="table table-striped table-sm">
+                                            <tbody style = "font-size:12px">
+                                                <tr style="height:1rem;">
+                                                    <form method="post" action="#" th:action="@{/business/itemlist/add}" th:object = "${emptyItem}">
+                                                    <th style="width:1rem; text-align:center;">
+                                                        <div class="form-group col-sm-15 flex-column d-flex"> <input type="text" id="businessName" th:field="*{name}" placeholder="Item Name"> </div>
+                                                    </th>
+
+                                                    <script>
+                                                      function changeFunc() {
+                                                                                  var selectBox = document.getElementById("itemcategory");
+                                                                                  var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+                                                                                  // alert(selectedValue); //Just for printing out
+                                                                                  document.getElementById("categorytext").value = selectedValue;
+                                                                            }
+                                                    </script>
+                                                    <th style="width:1rem; text-align:center;">
+                                                        <div class="form-group col-sm-12 flex-column d-flex"> <input type="text" id="categorytext" th:field="*{category}" placeholder="Category"> </div>
+                                                    </th>
+
+                                                    <th style="width:1rem; text-align:center;">
+                                                      <div class = "mx-auto">
+                                                        <select class="selectpicker" id="itemcategory" style="width:10rem; height:1.5rem;" th:value="*{category}" onchange="changeFunc();" >  
+                                                            <option value="">Select Item Category</option>                                                                     
+                                                            <option value="Bread" th:text="Bread"></option>
+                                                            <option value="Cake" th:text="Cake"></option>
+                                                            <option value="Coffee" th:text="Coffee"></option>
+                                                        </select>
+                                                    </div>
+                                                    
+                                                    </th>
+                                                    <th style="width:1rem; text-align:center;">
+                                                        <div class="form-group col-sm-10 flex-column d-flex"> <input type="number" step="any" id="weight" th:field="*{weight}" placeholder="Weight"> </div>
+                                                    </th> 
+                                                    <th style="width:1rem; text-align:center;">
+                                                        <div class="form-group col-sm-10 flex-column d-flex"> <input type="number" id="period" th:field="*{period}" placeholder="Period (days)"> </div>
+                                                    </th>
+                                                    <th style="width:1rem; text-align:center;">
+                                                        <div class="form-group col-sm-15 flex-column d-flex"> <input type="text" id="manufacturer" th:field="*{manufacturer}" placeholder="Manufacturer"> </div>
+                                                    </th> 
+                                                    <th style="width:1rem; text-align:center;">
+                                                        <div class="form-group col-sm flex-column d-flex"> <input class="btn btn-secondary btn-sm" style="font-size:9px " type="submit" value="Add"> </div>
+                                                    </th> 
+                                                </form>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                      
+
+                            <div class="col">
+                              <div class = "card" style="width:100%; height:25rem;"> 
+                                          
+                                          <div class="card-body">
+          
+                                            <table id = "itemList" class="table table-striped">
+                                              <thead style = "font-size:12px">
+                                                <tr style="height:1rem;">
+                                                    <th style="text-align:center;">ID</th>
+                                                    <th style="text-align:center;">Item Name</th>
+                                                    <th style="text-align:center;">Category</th>
+                                                    <th style="text-align:center;">Weight</th>
+                                                    <th style="text-align:center;">Period</th>
+                                                    <th style="text-align:center;">Manufacturer</th>
+                                                    <th></th>
+                                                    <th></th>
+                                                </tr>
+                                              </thead>
+            
+                                              <tbody style = "font-size:12px">
+                                                <tr th:each="item : ${itemList}">
+                                                  <td class="align-middle" style="text-align:center;" th:text="${item.id}" ></td>
+                                                    <td class="align-middle" style="text-align:center;" th:text="${item.name}"></td>
+                                                    <td class="align-middle" style="text-align:center;" th:text="${item.category}"></td>
+                                                    <td class="align-middle" style="text-align:center;" th:text="${item.weight}"></td>
+                                                    <td class="align-middle" style="text-align:center;" th:text="${item.period}"></td>
+                                                    <td class="align-middle" style="text-align:center;" th:text="${item.manufacturer}"></td>
+                                                    <td><a th:href="@{/business/item/update/}+${item.id}" style="font-size:12px">Edit</a></td>
+                                              	    <td><a th:href="@{/business/item/remove/}+${item.id}" style="font-size:12px">Remove</a></td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+          
+                                          </div>               
+                                      </div>
+                     
+          
+                                 
+                              
+                                
+                          </div>             
+                    
+           
+              </div>   
+          </div>  
+        </div> 
+
+  
+
+<script>
+    $(document).ready( function () {
+    $('#itemList').DataTable({
+        // "bFilter": false,
+        "bInfo": false,
+        // "dom": 'rtip',
+        "pageLength": 6
+    }
+
+    );
+} );
+</script>
+      
+</body>
+
+</html>

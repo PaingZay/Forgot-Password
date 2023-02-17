@@ -9,5 +9,9 @@ import com.example.WebAppApi.Model.Item;
 public interface ItemService {
 
     Item createItem (Item item);
-    List<Item> getItemList ();
+    Item updateItem (Item item);
+    List<Item> getItemList (Long id);
+    Item getItemByName(String name);
+    Item getItemById(Long id);
+	void deleteItemById(Long id);
 }

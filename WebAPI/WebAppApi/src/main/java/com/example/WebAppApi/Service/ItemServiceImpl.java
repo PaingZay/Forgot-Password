@@ -16,13 +16,34 @@ public class ItemServiceImpl implements ItemService {
     @Resource
     private ItemRepository itemRepository;
 
+
     @Override
     public Item createItem(Item item) {
         return itemRepository.saveAndFlush(item);
     }  
 
     @Override
-    public List<Item> getItemList() {
-        return itemRepository.findAll();
+    public Item updateItem(Item item) {
+        return itemRepository.saveAndFlush(item);
     }
+
+    @Override
+    public List<Item> getItemList(Long id) {
+        return itemRepository.findByBuzId(id);
+    }
+
+    @Override
+    public Item getItemByName(String name) {
+        return itemRepository.findByName(name);
+    }
+
+    @Override
+    public Item getItemById(Long id) {
+        return itemRepository.findItemById(id);
+    }
+
+	@Override
+	public void deleteItemById(Long id) {
+		itemRepository.deleteById(id);
+	}
 }
