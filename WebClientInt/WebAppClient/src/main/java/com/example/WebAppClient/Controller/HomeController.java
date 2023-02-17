@@ -194,9 +194,11 @@ public class HomeController {
     }
 
     @PostMapping("/forgotpassword-reset")
-    public String postResetPassword(@ModelAttribute FormData formData){
+    public String postResetPassword(@RequestParam("emailInput") String emailInput,@RequestParam("passwordInput") String passwordInput){
 
-        businessService.updatePasswordByEmail(formData);
+        FormData formdata = new FormData(emailInput, passwordInput);
+
+        businessService.updatePasswordByEmail(formdata);
 
         return "redirect:/login";
     }

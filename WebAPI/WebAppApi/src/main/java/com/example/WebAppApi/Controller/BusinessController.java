@@ -95,16 +95,12 @@ public class BusinessController {
         }
     }
 
-
-
     
     @PutMapping("/business/update")
     public ResponseEntity<Business> updateMember(@RequestBody Business business) {
         // logger.info("Update new member");
-
         try {
             Business savedBusiness = businessService.updateBusiness(business);
-
             return new ResponseEntity<>(savedBusiness, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -120,9 +116,11 @@ public class BusinessController {
     @PutMapping("/business/forgotpassword")
     public ResponseEntity<Business> updatePassword(@RequestBody FormData formdata) {
         // logger.info("Update new member");
-
+        System.out.println("Form data" + formdata.getEmail() + "Form data" + formdata.getPassword());
         try {
-            Business savedBusiness = businessService.updatePassword(formdata.getEmail(), formdata.getPassword());
+            Business buz = businessService.getBusinessbyEmail(formdata.getEmail());
+            buz.setPassword(formdata.getPassword());
+            Business savedBusiness = businessService.updateBusiness(buz);
 
             return new ResponseEntity<>(savedBusiness, HttpStatus.CREATED);
         } catch (Exception e) {

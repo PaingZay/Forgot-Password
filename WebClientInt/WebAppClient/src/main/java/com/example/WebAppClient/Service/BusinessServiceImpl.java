@@ -145,6 +145,7 @@ public class BusinessServiceImpl implements BusinessService {
 
     @Override
     public Business updatePasswordByEmail(FormData formdata) {
+        System.out.println("Form data" + formdata.getEmail() + "Form data" + formdata.getPassword());
         Mono<Business> updatedBusiness = webClient.put()
                 .uri("/business/forgotpassword")
                 .accept(MediaType.APPLICATION_JSON)

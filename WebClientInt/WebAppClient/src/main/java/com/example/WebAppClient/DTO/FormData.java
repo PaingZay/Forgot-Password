@@ -6,4 +6,10 @@ public class FormData {
 
     private String email;
     private String password;
+
+    public FormData(String email, String password)
+    {
+        this.email = email;      
+        this.password = password;
+    }
 }

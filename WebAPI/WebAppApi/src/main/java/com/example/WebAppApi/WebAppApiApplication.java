@@ -34,9 +34,8 @@ public class WebAppApiApplication {
 	}
 
 	@Bean
-	CommandLineRunner commandLineRun(BusinessService businessSerivce, FoodWastePackageService foodwastepackageService, ItemService itemService, ItemRepository itemRepository) {
+	CommandLineRunner commandLineRun(BusinessService businessService, FoodWastePackageService foodwastepackageService, ItemService itemService, ItemRepository itemRepository) {
 	  return args -> {
-		businessSerivce.updatePassword("pyne469@gmail.com", "1234");
 
 	 	//   String openingDays = "Mon , Tue, Wed, Thur, Fri, Sat, Sun";
 	 	//   LocalTime openingTime =  LocalTime.of(10,00,00);

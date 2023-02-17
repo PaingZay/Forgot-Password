@@ -17,5 +17,4 @@ public interface BusinessService {
     Business updateBusiness (Business business);
     OneTimePassword retrieveOTP (String email);
     Business getBusinessbyEmail (String email);
-    Business updatePassword (String email, String password);
 }
